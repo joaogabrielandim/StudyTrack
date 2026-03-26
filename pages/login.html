@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/css/login.css">
+    <script src="/js/login.js"></script>
+</head>
+<body>
+    <main>
+
+        <!--A tela que aparece ao clicar pra realizar o cadastro-->
+        <section id="apresentacao">
+            <div id="studytrackimg">
+                <img src="/images/logostsó.png" id="imagem_logo">
+                <h1 class="fontesans" id="studytrack">StudyTrack</h1>
+            </div>
+            <h1 class="fontesans">Acompanhe seu estudo</h1>
+            <p class="fontesans" id="descricao">Organize suas tarefas, monitore seu progresso e alcance <br> seus objetivos de estudo com facilidade</p>
+        </section>
+        <section id="cadastro">
+            <article class="titulo_article">
+                <h1 class="titulo">Cadastro</h1>
+                <p id="titulo2">Crie sua conta para começar</p>
+            </article>
+            <article>
+                <form action="sucesso.html" method="post" id="form_cadastro">
+                    <labor for="nome">Nome</labor>
+                    <input type="text" id="nome" required name="nome">
+                    <labor for="email">E-mail</labor>
+                    <input type="email" id="email" required name="email">
+                    <labor for="senha">Senha</labor>
+                    <input type="password" id="senha" required name="senha">
+                    <input id="cadastrar" type="submit" value="Cadastrar">
+                </form>
+                <a href="#" onclick="trocar('cadastro2')">Já tem uma conta? Faça login</a>
+            </article>
+        </section>
+        <!--A tela que aparece ao clicar para realizar o login-->
+        <section id="cadastro2">
+            <article class="titulo_article">
+                <h1 class="titulo">Login</h1>
+                <p id="titulo2">Entre na sua conta pra continuar</p>
+            </article>
+            <article>
+                <form action="sucesso.html" method="post" id="form_cadastro">
+                    <labor for="email">E-mail</labor>
+                    <input type="email" id="email" required name="email">
+                    <labor for="senha">Senha</labor>
+                    <input type="password" id="senha" required name="senha">
+                    <input id="cadastrar" type="submit" value="Entrar">
+                </form>
+                <a href="#" onclick="trocar('cadastro')">Não tem uma conta? Cadastre-se</a>
+            </article>
+        </section>
+    </main>
+</body>
+</html>

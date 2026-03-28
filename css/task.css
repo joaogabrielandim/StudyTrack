@@ -27,7 +27,7 @@ body {
 .logotipo {
   font-size: 18px;
   font-weight: bold;
-  color: #00a86b;
+  color: #2c7f63;
   margin-bottom: 40px;
   display: flex;
   align-items: center;
@@ -57,7 +57,7 @@ body {
 .avatar {
   width: 35px;
   height: 35px;
-  background-color: #00a86b;
+  background-color: #2c7f63;
   color: white;
   border-radius: 50%;
   display: flex;

@@ -11,12 +11,24 @@
     height: 100vh;
 }
 
+.icon {
+    width: 18px;
+    filter: contrast(20%);
+}
+
 a {
     display: block;
+    margin-top: 40px;
+    text-decoration: none;
+    font-family: sans-serif;
+    color:#5a5a5a;
+    margin-left: 15px;
 }
 
 .div-titulo {
     margin-bottom: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #9d9d9d;
 }
 
 .titulo {

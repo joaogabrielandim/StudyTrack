@@ -1,40 +1,12 @@
-.nav{
-    width: 10%;     
-    height: 100vh;   
-    background-color: white;
-    color: white;
-    padding: 20px;
 
-    position: fixed;
-    left: 0;
-    top: 0;
-}
 body{
-    background-color: gainsboro;
+    background-color: rgb(255, 255, 255);
     font-family: 'Poppins', sans-serif;
+    display:flex;
 
 }
-
-li{
-    color: black;
-    padding: 10%;
-}
-
-.nav ul{
-    list-style: none;
-    padding: 0;
-}
-
-.nav li{
-    margin: 10px 0;
-}
-
 h2{
     color: green;
-}
-
-.nav h2{
-    margin-top: 5px;
 }
 
 .conteudo{

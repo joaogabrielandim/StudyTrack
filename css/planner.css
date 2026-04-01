@@ -1,7 +1,7 @@
 
 body{
     background-color: #fafafa;
-    font-family: 'Poppins', sans-serif;
+    font-family: Arial, sans-serif;
     display:flex;
 
 }
@@ -49,12 +49,17 @@ h2{
 }
 .calendario{
     width: 65%;
-    background-color: #ffffff;
     padding: 30px;
-    border: 1px solid #eee;
-    border-radius: 12px;
-    height: 520px;
-    margin-top: -575px;
+    height: 40%;
+    margin-top: -600px;
     margin-left: 300px;
     margin-right: 550px;
+    margin-bottom: 20%;
+}
+
+.calendario iframe{
+    width: 100%;
+    height: 585px;
+    border: none;
+    border-radius: 12px;
 }

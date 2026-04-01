@@ -15,18 +15,6 @@ body {
   height: 100vh;
 }
 
-<<<<<<< HEAD
-.barra-lateral {
-  width: 260px;
-  background-color: #ffffff;
-  border-right: 1px solid #eaeaea;
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-}
-=======
->>>>>>> navbar
-
 .logotipo {
   font-size: 18px;
   font-weight: bold;

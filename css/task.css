@@ -15,6 +15,45 @@ body {
   height: 100vh;
 }
 
+#div-botao {
+  text-align: right;
+  margin-bottom: 10px;
+}
+
+#botao-sessao {
+  background: linear-gradient(to right, #48d1bf,#318e6f);
+  color:#ffffff;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  height: 25px;
+  width: 125px;
+}
+
+#sessao-estudos {
+  display: flex;
+  padding-left: 10px;
+  align-items: center;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  gap: 10px;
+  background-color: #ffffff;
+  border: 1px solid #eaeaea;
+  border-radius: 12px;
+  height: 150px;
+  margin-bottom: 20px;
+
+}
+
+.estudos {
+  flex-shrink: 0;
+  background-color: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #d0d0d0;
+  height: 100px;
+  width: 175px;
+}
+
 .logotipo {
   font-size: 18px;
   font-weight: bold;
@@ -71,6 +110,7 @@ body {
 .conteudo-principal {
   flex-grow: 1;
   padding: 40px;
+  overflow: hidden;
 }
 
 .cabecalho {

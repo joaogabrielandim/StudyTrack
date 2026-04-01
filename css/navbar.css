@@ -6,7 +6,7 @@
     padding-top: 30px;
     margin-left: 10px;
     display:block;
-    border-right: 1px solid #9d9d9d;
+    border-right: 2px solid #eaeaea;
     width: 25vh;
     height: 100vh;
 }
@@ -28,7 +28,7 @@ a {
 .div-titulo {
     margin-bottom: 30px;
     padding-bottom: 30px;
-    border-bottom: 1px solid #9d9d9d;
+    border-bottom: 2px solid #eaeaea;
 }
 
 .titulo {

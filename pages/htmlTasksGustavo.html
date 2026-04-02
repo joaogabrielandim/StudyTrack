@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Study Track — Tarefas</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Sora:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="cssTasksGustavo.css"/>
+</head>
+<body>
+
+  <!-- ══ SIDEBAR ══ -->
+  <aside class="sidebar">
+    <div class="logo">
+      <div class="logo-icon">📚</div>
+      <span class="logo-text">Study Track</span>
+    </div>
+    <nav class="nav">
+      <a class="nav-item" href="#">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0h6"/>
+        </svg>
+        Início
+      </a>
+      <a class="nav-item active" href="#">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2
+               M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+        </svg>
+        Tarefas
+      </a>
+      <a class="nav-item" href="#">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+        </svg>
+        Calendário
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="user-card">
+        <div class="avatar">E</div>
+        <div class="user-info">
+          <span class="user-name">Estudante</span>
+          <span class="user-email">estudante@email.com</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ══ CONTEÚDO PRINCIPAL ══ -->
+  <main class="main">
+
+    <!-- Cabeçalho -->
+    <div class="header">
+      <div class="header-titles">
+        <h1>Tarefas</h1>
+        <p>Gerencie suas atividades de estudo</p>
+      </div>
+      <button class="btn-create" onclick="openModal()">
+        <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+        </svg>
+        Criar Tarefa
+      </button>
+    </div>
+
+    <!-- Grid principal -->
+    <div class="grid">
+
+      <!-- Coluna Esquerda -->
+      <div class="left">
+
+        <!-- Progresso Geral -->
+        <div class="card">
+          <div class="progress-header">
+            <h2>Progresso Geral</h2>
+            <span class="progress-count" id="progress-count">2/6 concluídas</span>
+          </div>
+          <div class="progress-bar-wrap">
+            <div class="progress-bar-fill" id="progress-bar"></div>
+          </div>
+          <p class="progress-label" id="progress-label">33% das tarefas concluídas</p>
+        </div>
+
+        <!-- Minhas Tarefas -->
+        <div class="card">
+          <div class="tasks-header">
+            <h2>Minhas Tarefas</h2>
+            <div class="filter-tabs">
+              <button class="filter-tab active" onclick="setFilter('todas', this)">Todas</button>
+              <button class="filter-tab"        onclick="setFilter('alta',  this)">Alta</button>
+              <button class="filter-tab"        onclick="setFilter('media', this)">Média</button>
+              <button class="filter-tab"        onclick="setFilter('baixa', this)">Baixa</button>
+            </div>
+          </div>
+          <div class="task-list" id="task-list"></div>
+        </div>
+
+        <!-- Tarefas Concluídas -->
+        <div class="card">
+          <div class="completed-header">Tarefas Concluídas</div>
+          <div class="completed-grid" id="completed-grid"></div>
+        </div>
+
+      </div><!-- /left -->
+
+      <!-- Coluna Direita -->
+      <div class="right">
+
+        <!-- Horas de Estudo -->
+        <div class="stat-card">
+          <div class="stat-head">
+            <span class="stat-label">Horas de Estudo</span>
+            <div class="stat-icon">
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10"/>
+                <path stroke-linecap="round" d="M12 6v6l4 2"/>
+              </svg>
+            </div>
+          </div>
+          <div class="stat-value">23h</div>
+          <div class="stat-sub">+12% esta semana</div>
+        </div>
+
+        <!-- Sessões de Estudo -->
+        <div class="stat-card">
+          <div class="stat-head">
+            <span class="stat-label">Sessões de Estudo</span>
+            <div class="stat-icon">
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round"
+                  d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13
+                     C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13
+                     C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13
+                     C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+              </svg>
+            </div>
+          </div>
+          <div class="stat-value">42</div>
+          <div class="stat-sub neutral">Este mês</div>
+        </div>
+
+        <!-- Sequência -->
+        <div class="stat-card">
+          <div class="stat-head">
+            <span class="stat-label">Sequência</span>
+            <div class="stat-icon">
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+              </svg>
+            </div>
+          </div>
+          <div class="stat-value">7 dias</div>
+          <div class="stat-sub fire">Continue assim! 🔥</div>
+        </div>
+
+        <!-- Distribuição -->
+        <div class="distrib-card">
+          <div class="distrib-title">Distribuição</div>
+          <div class="donut-wrap">
+            <svg width="120" height="120" viewBox="0 0 120 120" id="donut-svg">
+              <circle cx="60" cy="60" r="44" fill="none" stroke="#e2f5f0" stroke-width="16"/>
+              <!-- segmentos renderizados pelo JS -->
+            </svg>
+          </div>
+          <div class="legend">
+            <div class="legend-item"><div class="legend-dot" style="background:#14b8a6"></div>Matemática</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#10b981"></div>Português</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#059669"></div>História</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#6ee7b7"></div>Ciências</div>
+          </div>
+        </div>
+
+        <!-- Gráfico Semanal -->
+        <div class="week-card">
+          <div class="week-title">Esta Semana</div>
+          <div class="bar-chart" id="bar-chart"></div>
+        </div>
+
+      </div><!-- /right -->
+
+    </div><!-- /grid -->
+
+  </main>
+
+  <!-- ══ MODAL — NOVA TAREFA ══ -->
+  <div class="modal-overlay" id="modal-overlay" onclick="closeModalOutside(event)">
+    <div class="modal">
+      <h3>Nova Tarefa</h3>
+      <div class="form-group">
+        <label>Título</label>
+        <input type="text" id="new-title" placeholder="Ex: Estudar Álgebra Linear"/>
+      </div>
+      <div class="form-group">
+        <label>Disciplina</label>
+        <select id="new-subject">
+          <option value="Matemática">Matemática</option>
+          <option value="Português">Português</option>
+          <option value="História">História</option>
+          <option value="Ciências">Ciências</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Prioridade</label>
+        <select id="new-priority">
+          <option value="alta">Alta</option>
+          <option value="media">Média</option>
+          <option value="baixa">Baixa</option>
+        </select>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-cancel"  onclick="closeModal()">Cancelar</button>
+        <button class="btn-confirm" onclick="createTask()">Criar Tarefa</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Script -->
+  <script src="jsTasksGustavo.js"></script>
+
+</body>
+</html>

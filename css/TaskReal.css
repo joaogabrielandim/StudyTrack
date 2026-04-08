@@ -1,0 +1,124 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial;
+}
+
+body {
+  background-color: #fafafa;
+}
+
+.principal {
+  display: flex;
+}
+
+.barra-lateral {
+  width: 220px;
+  height: 100vh;
+  background: #ffffff;
+  padding: 20px;
+  border-right: 1px solid #ddd;
+}
+
+.logotipo {
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+.menu {
+  flex-grow: 1;
+}
+
+.item-menu {
+  padding: 12px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #555;
+}
+
+.conteudo-principal {
+  flex: 1;
+  padding: 30px;
+}
+
+.cabecalho {
+  margin-bottom: 20px;
+}
+
+.box {
+  position: relative;
+}
+
+.boxprogresso {
+  height: 180px;
+  background: white;
+  border-radius: 12px;
+  margin-right: 30%;
+  border: 1px solid #eaeaea;
+}
+
+.boxhoras {
+  height: 650px;
+  background-color: white;
+  border-radius: 12px;
+  margin-right: 30%;
+  margin-top: 40px;
+  border: 1px solid #eaeaea;
+}
+
+.boxconcluidas {
+  height: 180px;
+  background: white;
+  border-radius: 12px;
+  margin-right: 30%;
+  margin-top: 40px;
+  border: 1px solid #eaeaea;
+}
+.horasdeestudo {
+  height: 180px;
+  width: 300px;
+  background: white;
+  border-radius: 12px;
+  margin-left: 1000px;
+  position: relative;
+  top: -1490px;    
+  right: 50px;   
+  border: 1px solid #eaeaea; 
+}
+
+.boxsequencia{
+  height: 180px;
+  width: 300px;
+  background: white;
+  border-radius: 12px;
+  margin-left: 1000px;
+  position: relative;
+  top: -870px;    
+  right: 50px;
+  border: 1px solid #eaeaea;
+}
+
+.boxdistribuicao{
+  height: 220px;
+  width: 300px;
+  background: white;
+  border-radius: 12px;
+  margin-left: 1000px;
+  position: relative;
+  top: -820px;    
+  right: 50px;
+  border: 1px solid #eaeaea;
+}
+.graficos{
+  height: 380px;
+  width: 300px;
+  background: white;
+  border-radius: 12px;
+  margin-left: 1000px;
+  position: relative;
+  top: -960px;    
+  right: 50px;
+  border: 1px solid #eaeaea;
+}

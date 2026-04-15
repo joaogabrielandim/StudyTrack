@@ -1,0 +1,127 @@
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #ffffff;
+  font-family: sans-serif;
+}
+
+.apresentacao {
+  flex: 1;
+  max-width: 480px;
+  padding: 0 40px;
+}
+
+.studytrackimg {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.imagem_logo {
+  height: 100px;
+}
+
+.studytrack {
+  font-weight: bold;
+  font-size: 50px;
+  color: #2c7f63;
+  margin: 0;
+}
+
+.subtitulo {
+  font-family: sans-serif;
+  margin: 16px 0 8px;
+}
+
+.descricao {
+  color: #9d9d9d;
+  font-family: sans-serif;
+  line-height: 1.6;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 500px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 10px 16px rgba(0, 0, 0, 0.15);
+  margin-left: 100px;
+  padding: 24px 0 20px;
+}
+
+.titulo_article {
+  align-self: flex-start;
+  padding-left: 20px;
+  margin-bottom: 8px;
+}
+
+.titulo {
+  font-weight: bold;
+  font-family: sans-serif;
+  border-radius: 5px;
+  margin: 0 0 4px;
+}
+
+.titulo2 {
+  text-align: left;
+  font-family: sans-serif;
+  color: #9d9d9d;
+  margin: 0;
+}
+
+.formWrapper {
+  width: 100%;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.labor {
+  display: block;
+  font-family: sans-serif;
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+
+.input {
+  border: none;
+  margin-bottom: 10px;
+  background-color: #e9e9e9;
+  width: 100%;
+  height: 25px;
+  border-radius: 5px;
+  padding: 0 8px;
+  box-sizing: border-box;
+}
+
+.botao {
+  margin-top: 10px;
+  display: block;
+  background: linear-gradient(to right, #48d1bf, #318e6f);
+  color: #ffffff;
+  font-weight: bold;
+  width: 100%;
+  height: 35px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.link {
+  display: block;
+  text-align: center;
+  font-weight: bold;
+  font-size: 13px;
+  font-family: sans-serif;
+  color: #318e6f;
+  text-decoration: none;
+  margin-top: 12px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}

@@ -1,12 +1,13 @@
 import './App.css'
 import Navbar from "./components/Navbar.jsx"
-import Login from "./pages/login-page.jsx"
 import Home from "./pages/home-page.jsx"
+import Task from "./pages/task-page.jsx"
+import Planner from "./pages/planner-page.jsx"
 
 function App() {
 
   return (
-    <Home />
+    <Planner />
   )
 }
 

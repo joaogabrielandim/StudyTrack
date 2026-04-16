@@ -9,8 +9,12 @@ function Homejs() {
     setDataCompleta(agora.toLocaleDateString("pt-BR", opcoes));
   }, []);
 
-  function adicionarSessao() {
-  }
+function adicionarSessao() {
+const nova_sessao = document.createElement("div");
+nova_sessao.classList.add("estudos");
+
+document.getElementById("sessao-estudos").appendChild(nova_sessao)
+}
 
   return { dataCompleta, adicionarSessao };
 }

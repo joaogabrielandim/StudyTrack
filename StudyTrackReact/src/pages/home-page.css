@@ -111,6 +111,7 @@ body {
   flex-grow: 1;
   padding: 40px;
   overflow: hidden;
+  overflow-y: auto;
 }
 
 .cabecalho {

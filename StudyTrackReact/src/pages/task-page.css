@@ -11,6 +11,7 @@ body {
 
 .principal {
   display: flex;
+  height: 100vh;
 }
 
 .barra-lateral {

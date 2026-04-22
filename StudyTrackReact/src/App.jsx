@@ -1,4 +1,5 @@
 import './App.css'
+import Login from "./pages/login-page.jsx"
 import Navbar from "./components/Navbar.jsx"
 import Home from "./pages/home-page.jsx"
 import Task from "./pages/task-page.jsx"
@@ -8,7 +9,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 function App() {
 
   return (
-    <BrowserRouter>
+    <Login/>
+
+    /*<BrowserRouter>
       
 
       <Routes>
@@ -16,7 +19,7 @@ function App() {
         <Route path="/tarefas" element={<Task/>} />
         <Route path="/calendario" element={<Planner/>} />
       </Routes>
-    </BrowserRouter>
+    </BrowserRouter>*/
   )
 }
 

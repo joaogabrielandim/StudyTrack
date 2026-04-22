@@ -2,7 +2,6 @@ import "./Navbar.css"
 import homeicon from "../assets/homeicon.svg"
 import taskicon from "../assets/taskicon.svg"
 import calendaricon from "../assets/calendaricon.svg"
-// Sugestão: adicione os ícones novos na sua pasta assets
 import settingsicon from "../assets/settingsicon.jpg"
 import logouticon from "../assets/logouticon.png"
 import { Link } from "react-router-dom"

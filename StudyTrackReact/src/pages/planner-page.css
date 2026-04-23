@@ -1,4 +1,4 @@
-.body{
+.body-planner{
     background-color: #fafafa;
     font-family: Arial, sans-serif;
     display:flex;
@@ -9,20 +9,20 @@ h2{
     color: green;
 }
 
-.principal {
+.principal-planner {
     margin: 20px;
     display: block;
     width: 300px;
     height: 100vh;
 }
 
-.conteudo{
+.conteudo-planner{
     display:flex;
     width: 100%;
     overflow-y: auto;
 }
 
-.tarefas{
+.tarefas-planner{
     padding: 10px;
     background: #ffffff;
     border: 1px solid #eee;
@@ -37,7 +37,7 @@ h2{
     }
 }
 
-.eventos{
+.eventos-planner{
     padding: 10px;
     background: #ffffff;
     border: 1px solid #eee;
@@ -50,13 +50,13 @@ h2{
         color: #333;
     }
 }
-.calendario{
+.calendario-planner{
     flex: 1;
     margin: 20px;
     height: 100vh;
 }
 
-.calendario iframe{
+.calendario-planner iframe{
     border: none;
     border-radius: 12px;
 }

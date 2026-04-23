@@ -1,9 +1,3 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 .navbar {
     padding: 30px 20px;
     background-color: #ffffff;
@@ -12,6 +6,7 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
+    
 }
 
 .div-titulo {
@@ -35,8 +30,7 @@
 
 nav {
     display: flex;
-    flex-direction: column;
-    gap: 10px; 
+    flex-direction: column; 
 }
 
 nav a {
@@ -47,6 +41,7 @@ nav a {
     font-family: Arial, sans-serif;
     color: #555; 
     border-radius: 8px;
+    flex-shrink: 0;
 }
 
 nav a:hover {

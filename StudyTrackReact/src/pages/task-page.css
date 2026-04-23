@@ -1,37 +1,20 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Arial;
-}
 
-body {
-  background-color: #fafafa;
-}
-
-.principal {
+.principal-task {
   display: flex;
   height: 100vh;
+  
 }
 
-.barra-lateral {
-  width: 220px;
-  height: 100vh;
-  background: #ffffff;
-  padding: 20px;
-  border-right: 1px solid #ddd;
-}
-
-.logotipo {
+.logotipo-task {
   font-weight: bold;
   margin-bottom: 30px;
 }
 
-.menu {
+.menu-task {
   flex-grow: 1;
 }
 
-.item-menu {
+.item-menu-task {
   padding: 12px;
   margin-bottom: 8px;
   border-radius: 8px;
@@ -39,20 +22,23 @@ body {
   color: #555;
 }
 
-.conteudo-principal {
+.conteudo-principal-task {
+  display:block;
   flex: 1;
   padding: 30px;
+  overflow-y: auto;
+  background-color: #fafafa;
 }
 
-.cabecalho {
+.cabecalho-task {
   margin-bottom: 20px;
 }
 
-.box {
+.box-task {
   position: relative;
 }
 
-.boxprogresso {
+.boxprogresso-task {
   height: 180px;
   background: white;
   border-radius: 12px;
@@ -60,7 +46,7 @@ body {
   border: 1px solid #eaeaea;
 }
 
-.boxhoras {
+.boxhoras-task {
   height: 650px;
   background-color: white;
   border-radius: 12px;
@@ -69,7 +55,7 @@ body {
   border: 1px solid #eaeaea;
 }
 
-.boxconcluidas {
+.boxconcluidas-task {
   height: 180px;
   background: white;
   border-radius: 12px;
@@ -77,7 +63,7 @@ body {
   margin-top: 40px;
   border: 1px solid #eaeaea;
 }
-.horasdeestudo {
+.horasdeestudo-task {
   height: 180px;
   width: 300px;
   background: white;
@@ -89,7 +75,7 @@ body {
   border: 1px solid #eaeaea; 
 }
 
-.boxsequencia{
+.boxsequencia-task{
   height: 180px;
   width: 300px;
   background: white;
@@ -101,7 +87,7 @@ body {
   border: 1px solid #eaeaea;
 }
 
-.boxdistribuicao{
+.boxdistribuicao-task{
   height: 220px;
   width: 300px;
   background: white;
@@ -112,7 +98,7 @@ body {
   right: 50px;
   border: 1px solid #eaeaea;
 }
-.graficos{
+.graficos-task{
   height: 380px;
   width: 300px;
   background: white;

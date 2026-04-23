@@ -1,8 +1,27 @@
 import "./login-page.css"
-import Trocar from "./login-page"
+import { Trocar, CreateUser, LoginUser } from "./login-page"
 import ImagemLogo from "../assets/logostsó.png"
+import { Navigate, useNavigate } from "react-router-dom";
 
 function Login() {
+    const navigate = useNavigate();
+
+    function cadastro(e) {
+        e.preventDefault();
+        const email = document.getElementById("email-cadastro-login").value;
+        const senha = document.getElementById("senha-cadastro-login").value;
+        CreateUser(email,senha);
+
+    }
+
+    function entrar(e) {
+
+        e.preventDefault();
+        const email = document.getElementById("email-login").value;
+        const senha = document.getElementById("senha-login").value;
+        LoginUser(email,senha,navigate);
+    }
+
     return (
         <main>
             {/* A tela que aparece ao clicar pra realizar o cadastro */}
@@ -25,13 +44,13 @@ function Login() {
                 <p id="titulo2-login">Crie sua conta para começar</p>
                 </article>
                 <article className="article-form-login" >
-                <form action="sucesso.html" method="post" id="form_cadastro-login">
-                    <label htmlFor="nome-login">Nome</label>
-                    <input type="text" id="nome-login" required name="nome" />
-                    <label htmlFor="email-login">E-mail</label>
-                    <input type="email" id="email-login" required name="email" />
-                    <label htmlFor="senha-login">Senha</label>
-                    <input type="password" id="senha-login" required name="senha" />
+                <form onSubmit={cadastro} id="form_cadastro-login">
+                    <label htmlFor="nome-cadastro-login">Nome</label>
+                    <input type="text" id="nome-cadastro-login" required name="nome" placeholder=" Nome"/>
+                    <label htmlFor="email-cadastro-login">E-mail</label>
+                    <input type="email" id="email-cadastro-login" required name="email" placeholder=" E-mail"/>
+                    <label htmlFor="senha-cadastro-login">Senha</label>
+                    <input type="password" id="senha-cadastro-login" required name="senha" placeholder=" Senha"/>
                     <input id="cadastrar-login" type="submit" value="Cadastrar" />
                 </form>
                 <a href="#" onClick={() => Trocar('cadastro2-login')}>Já tem uma conta? Faça login</a>
@@ -44,11 +63,11 @@ function Login() {
                 <p id="titulo2-login">Entre na sua conta pra continuar</p>
                 </article>
                 <article className="article-form-login">
-                <form action="sucesso.html" method="post" id="form_cadastro-login">
+                <form onSubmit={entrar} id="form_cadastro-login">
                     <label htmlFor="email-login">E-mail</label>
-                    <input type="email" id="email-login" required name="email" />
+                    <input type="email" id="email-login" required name="email" placeholder=" E-mail" />
                     <label htmlFor="senha-login">Senha</label>
-                    <input type="password" id="senha-login" required name="senha" />
+                    <input type="password" id="senha-login" required name="senha" placeholder=" Senha"/>
                     <input id="cadastrar-login" type="submit" value="Entrar" />
                 </form>
                 <a href="#" onClick={() => Trocar('cadastro-login')}>Não tem uma conta? Cadastre-se</a>

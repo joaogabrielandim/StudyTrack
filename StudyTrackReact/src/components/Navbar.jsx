@@ -12,15 +12,15 @@ function Navbar() {
                 <h1 className="titulo">StudyTrack</h1>
             </div>
             <nav>
-                <Link to="/" > <img src={homeicon} className="icon"></img> Início</Link>
+                <Link to="/home" > <img src={homeicon} className="icon"></img> Início</Link>
                 <Link to="/tarefas" > <img src={taskicon} className="icon"></img> Tarefas</Link>
                 <Link to="/calendario" > <img src={calendaricon} className="icon"></img> Calendário</Link>
             </nav>
-            <div class="perfil-usuario">
-            <div class="avatar">JG</div>
-            <div class="info-usuario">
-            <div class="nome">João Gadelha</div>
-            <div class="email">joaogadelha@gmail.com</div>
+            <div className="perfil-usuario">
+            <div className="avatar">JG</div>
+            <div className="info-usuario">
+            <div className="nome">João Gadelha</div>
+            <div className="email">joaogadelha@gmail.com</div>
           </div>
         </div>
         </section>

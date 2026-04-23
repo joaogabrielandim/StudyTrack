@@ -25,6 +25,8 @@ a {
 .titulo_article-login {
     align-self: flex-start;
     padding-left: 20px;
+    margin-bottom: 20px;
+    margin-top:20px;
 }
 
 .titulo-login {

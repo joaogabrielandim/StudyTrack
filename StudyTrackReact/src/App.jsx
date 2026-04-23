@@ -9,17 +9,15 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 function App() {
 
   return (
-    <Login/>
 
-    /*<BrowserRouter>
-      
-
+    <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home/>} />
+        <Route path="/" element={<Login/>} />
+        <Route path="/home" element={<Home/>} />
         <Route path="/tarefas" element={<Task/>} />
         <Route path="/calendario" element={<Planner/>} />
       </Routes>
-    </BrowserRouter>*/
+    </BrowserRouter>
   )
 }
 

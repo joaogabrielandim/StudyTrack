@@ -8,10 +8,10 @@ function Login() {
 
     function cadastro(e) {
         e.preventDefault();
+        const nome = document.getElementById("nome-cadastro-login").value;
         const email = document.getElementById("email-cadastro-login").value;
         const senha = document.getElementById("senha-cadastro-login").value;
-        CreateUser(email,senha);
-
+        CreateUser(email,senha,nome);
     }
 
     function entrar(e) {

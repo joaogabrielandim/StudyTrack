@@ -21,7 +21,7 @@ function Navbar() {
 
       <div className="perfil-usuario">
         <div className="user-info-wrapper">
-          <div className="avatar">JG</div>
+          <div className="avatar">J</div>
           <div className="info-usuario">
             <div className="nome">João Gadelha</div>
             <div className="email">joaogadelha@gmail.com</div>

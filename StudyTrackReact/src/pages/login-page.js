@@ -1,15 +1,30 @@
 import { auth } from "../firebase";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 
 
-export function CreateUser(email, password) {
+export function CreateUser(email, password, nome) {
     createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
         const user = userCredential.user;
+
+        return updateProfile(user, {
+            displayName: nome
+        })
     })
     .catch((error) => {
         const errorCode = error.code;
-        const errorMessage = error.message;
+        
+        if (errorCode === "auth/email-already-in-use") {
+            alert("E-mail já cadastrado");
+        } else if (errorCode === "auth/invalid-email") {
+            alert("E-mail inválido");
+        } else if (errorCode === "auth/weak-password") {
+            alert("Senha fraca, mínimo 12 caracteres");
+        } else if (errorCode === "auth/password-does-not-meet-requirements") {
+            alert("Senha inválida, a senha precisa conter um caractere maiúsculo e minúsculo, um caractere especial e um numérico")
+        } else {
+            alert(errorCode);
+        }
     });
 }
 
@@ -23,7 +38,19 @@ export function LoginUser(email, password, navigate) {
     })
     .catch((error) => {
         const errorCode = error.code;
-        const errorMessage = error.message;
+        if (errorCode === "auth/user-not-found") {
+            alert("E-mail não encontrado");
+        } else if (errorCode === "auth/wrong-password") {
+            alert("Senha incorreta");
+        } else if (errorCode === "auth/invalid-credential") {
+            alert("E-mail ou senha inválidos");
+        } else if (errorCode === "auth/user-disabled") {
+            alert("Usuário desativado no console")
+        } else if (errorCode === "auth/too-many-requests") {
+            alert("Muitas tentativas, conta temporáriamente bloqueada")
+        } else {
+            alert(errorCode);
+        }
     });
 }
 

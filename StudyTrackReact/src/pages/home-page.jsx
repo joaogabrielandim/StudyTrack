@@ -2,7 +2,6 @@ import Navbar from "../components/Navbar"
 import Homejs from "./home-page"
 import "./home-page.css"
 
-// Adicionada a prop { abrirModal }
 function Home({ abrirModal }) {
 
 const { dataCompleta } = Homejs();
@@ -26,7 +25,6 @@ const { dataCompleta } = Homejs();
         </div>
  
         <div id="div-botao">
-          {/* O botão agora chama a função recebida por prop */}
           <button id="botao-sessao" onClick={abrirModal}>
             Adicionar Sessão
           </button>

@@ -1,42 +1,42 @@
 import React from 'react';
 
-const Modal = ({ isOpen, onClose }) => {
-  if (!isOpen) return null; 
+const Modal2 = ({ isOpen2, onClose2 }) => {
+  if (!isOpen2) return null; 
 
   return (
-    <div style={styles.overlay}>
-      <div style={styles.modal}>
-        <div style={styles.header}>
-          <h2 style={styles.tituloModal}>Nova Sessão</h2>
-          <button onClick={onClose} style={styles.fecharbotao}>&times;</button>
+    <div style={styles2.overlay}>
+      <div style={styles2.modal}>
+        <div style={styles2.header}>
+          <h2 style={styles2.tituloModal}>Nova Tarefa</h2>
+          <button onClick={onClose2} style={styles2.fecharbotao}>&times;</button>
         </div>
         
-        <form style={styles.form}>
-          <label>Tempo de Estudo</label>
-          <input type="text" style={styles.input} />
+        <form style={styles2.form}>
+          <label>Titulo da Tarefa</label>
+          <input type="text" style={styles2.input} />
           
           <label>Matéria</label>
-          <select style={styles.input}>
+          <select style={styles2.input}>
             <option>Selecione uma matéria</option>
             <option>Matemática</option>
             <option>Programação</option>
           </select>
 
-          <label>Nivel de Foco</label>
-          <select style={styles.input}>
-            <option>Médio</option>
-            <option>Alto</option>
-            <option>Baixo</option>
+          <label>Nivel de Prioridade</label>
+          <select style={styles2.input}>
+            <option>Média</option>
+            <option>Alta</option>
+            <option>Baixa</option>
           </select>
 
-          <button type="button" style={styles.adicionarbotao}>Adicionar Sessão</button>
+          <button type="button" style={styles2.adicionarbotao}>Adicionar Tarefa</button>
         </form>
       </div>
     </div>
   );
 };
 
-const styles = {
+const styles2 = {
   overlay: {
     position: 'fixed',
     top: 0,
@@ -101,4 +101,4 @@ const styles = {
   } 
 };
 
-export default Modal;
+export default Modal2;

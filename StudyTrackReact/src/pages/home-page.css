@@ -21,7 +21,7 @@ body {
 }
 
 #botao-sessao {
-  background: linear-gradient(to right, #48d1bf,#318e6f);
+  background: #318e6f;
   color:#ffffff;
   font-weight: bold;
   border: none;

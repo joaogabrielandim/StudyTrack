@@ -1,8 +1,6 @@
-
 .principal-task {
   display: flex;
   height: 100vh;
-  
 }
 
 .logotipo-task {
@@ -23,7 +21,7 @@
 }
 
 .conteudo-principal-task {
-  display:block;
+  display: block;
   flex: 1;
   padding: 30px;
   overflow-y: auto;
@@ -35,23 +33,31 @@
 }
 
 .box-task {
-  position: relative;
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.coluna-cards-task {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  flex: 1;
+  min-width: 0;
 }
 
 .boxprogresso-task {
   height: 180px;
   background: white;
   border-radius: 12px;
-  margin-right: 30%;
   border: 1px solid #eaeaea;
+  margin-right: -600px;
 }
 
 .boxhoras-task {
   height: 650px;
   background-color: white;
   border-radius: 12px;
-  margin-right: 30%;
-  margin-top: 40px;
   border: 1px solid #eaeaea;
 }
 
@@ -59,53 +65,52 @@
   height: 180px;
   background: white;
   border-radius: 12px;
-  margin-right: 30%;
-  margin-top: 40px;
-  border: 1px solid #eaeaea;
-}
-.horasdeestudo-task {
-  height: 180px;
-  width: 300px;
-  background: white;
-  border-radius: 12px;
-  margin-left: 1000px;
-  position: relative;
-  top: -1490px;    
-  right: 50px;   
-  border: 1px solid #eaeaea; 
-}
-
-.boxsequencia-task{
-  height: 180px;
-  width: 300px;
-  background: white;
-  border-radius: 12px;
-  margin-left: 1000px;
-  position: relative;
-  top: -870px;    
-  right: 50px;
   border: 1px solid #eaeaea;
 }
 
-.boxdistribuicao-task{
-  height: 220px;
-  width: 300px;
-  background: white;
+.TarefasPorFazer-task {
+  flex: 1;
+  min-width: 0;
+  background-color: white;
   border-radius: 12px;
-  margin-left: 1000px;
-  position: relative;
-  top: -820px;    
-  right: 50px;
   border: 1px solid #eaeaea;
+  align-self: stretch;
+  height: 650px;
+  margin-top: 205px;
 }
-.graficos-task{
-  height: 380px;
-  width: 300px;
-  background: white;
+
+.divInterna1-task {
+  height: 130px;
+  border: 2px dashed #dcdcdc;
   border-radius: 12px;
-  margin-left: 1000px;
-  position: relative;
-  top: -960px;    
-  right: 50px;
-  border: 1px solid #eaeaea;
+  margin: 25px 20px 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fafafa;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.divInterna2-task {
+  height: 600px;
+  border: 2px dashed #dcdcdc;
+  border-radius: 12px;
+  margin: 25px 20px 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fafafa;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.divInterna3-task {
+    height: 600px;
+  border: 2px dashed #dcdcdc;
+  border-radius: 12px;
+  margin: 25px 20px 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fafafa;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
 }

@@ -16,19 +16,21 @@ function Task() {
              
                     <div className="coluna-cards-task">
                         <div className="boxprogresso-task">
-                            <h3>Suas tarefas</h3>
-                            <p>[Colocar tarefas aqui]</p>
+                            <div className="divInterna1-task">
+                                /* Aqui você pode adicionar os cards de tarefas*/
+                            </div>
                         </div>
                         
                         <div className="boxhoras-task">
-                            <h3>Seus eventos</h3>
-                            <p>[Colocar eventos aqui]</p>
+                            <div className="divInterna2-task">
+                                /* tarefas feitas*/
+                            </div>
                         </div>
                     </div>
 
                 
-                    <div className="horasdeestudo-task">
-                        <div className="placeholder-calendario-task">
+                    <div className="TarefasPorFazer-task">
+                        <div className="divInterna3-task">
                             Calendário
                         </div>
                     </div>

@@ -2,11 +2,12 @@ import "./Navbar.css"
 import homeicon from "../assets/homeicon.svg"
 import taskicon from "../assets/taskicon.svg"
 import calendaricon from "../assets/calendaricon.svg"
-import settingsicon from "../assets/settingsicon.jpg"
-import logouticon from "../assets/logouticon.png"
+import settingsicon from "../assets/settings.svg"
+import logouticon from "../assets/user-logout.svg"
 import { Link } from "react-router-dom"
 
 function Navbar() {
+
   return (
     <section id="idnavbar" className="navbar">
       <div className="div-titulo">

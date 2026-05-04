@@ -2,10 +2,9 @@ import Navbar from "../components/Navbar"
 import Homejs from "./home-page"
 import "./home-page.css"
 
+function Home({ abrirModal }) {
 
-function Home() {
-
-const { dataCompleta, adicionarSessao } = Homejs();
+const { dataCompleta } = Homejs();
 
     return (
     <div className="container-principal">
@@ -26,7 +25,9 @@ const { dataCompleta, adicionarSessao } = Homejs();
         </div>
  
         <div id="div-botao">
-          <button id="botao-sessao" onClick={adicionarSessao}>Adicionar Sessão</button>
+          <button id="botao-sessao" onClick={abrirModal}>
+            Adicionar Sessão
+          </button>
         </div>
  
         <div id="sessao-estudos">

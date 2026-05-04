@@ -107,10 +107,27 @@
     height: 600px;
   border: 2px dashed #dcdcdc;
   border-radius: 12px;
-  margin: 25px 20px 0 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #fafafa;
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+  margin-left: 1000px;
+  position: relative;
+  top: -960px;    
+  right: 50px;
+  border: 1px solid #eaeaea;
 }
+.cabecalho-topo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 4px;
+}
+
+.botao-nova-tarefa {
+    background-color: #318e6f;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+

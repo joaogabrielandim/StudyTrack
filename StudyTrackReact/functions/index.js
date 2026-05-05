@@ -1,32 +1,56 @@
-const functions = require('firebase-functions');
-const express = require('express');
-const cors = require('cors');
+const express = require("express");
+const {onRequest} = require("firebase-functions/https");
+const {initializeApp} = require("firebase-admin/app");
+const {getFirestore} = require("firebase-admin/firestore");
+
+initializeApp();
+const db = getFirestore();
 
 const app = express();
-app.use(cors({ origin: true }));
+app.use(express.json());
 
-// Rota GET
-app.get('/', (req, res) => {
-  res.status(200).json({ message: 'Olá do Firebase Functions!' });
+app.get("/", (req, res) => {
+  res.send("OK");
 });
 
-// Rota POST
-app.post('/data', (req, res) => {
-  const data = req.body;
-  res.status(200).json({ message: 'Dados recebidos com sucesso!', data });
+app.post("/salvar", async (req, res) => {
+  try {
+    await db.collection("teste").add(req.body);
+    res.json({mensagem: "Salvo com sucesso"});
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
 });
 
-// Rota PUT
-app.put('/update', (req, res) => {
-  const updateData = req.body;
-  res.status(200).json({ message: 'Dados atualizados com sucesso!', updateData });
+app.get("/listar", async (req, res) => {
+  try {
+    const snapshot = await db.collection("teste").get();
+    const dados = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data()
+    }));
+    res.json(dados);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
 });
 
-// Rota DELETE
-app.delete('/delete', (req, res) => {
-  res.status(200).json({ message: 'Dados deletados com sucesso!' });
+app.delete("/deletar/:id", async (req, res) => {
+  try {
+    await db.collection("teste").doc(req.params.id).delete();
+    res.json({mensagem: "Deletado com sucesso"});
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
 });
 
+app.put("/editar/:id", async (req, res) => {
+  try {
+    await db.collection("teste").doc(req.params.id).update(req.body);
+    res.json({mensagem: "Atualizado com sucesso"});
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+});
 
-exports.api = functions.https.onRequest(app);
-
+exports.api = onRequest(app);

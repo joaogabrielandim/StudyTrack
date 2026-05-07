@@ -1,9 +1,18 @@
-const express = require("express");
-const { onRequest } = require("firebase-functions/https");
-const { initializeApp } = require("firebase-admin/app");
-const { getFirestore } = require("firebase-admin/firestore");
+import express from "express";
+import { getFirestore } from "firebase-admin/firestore";
+import { fileURLToPath} from "url";
+import { readFileSync } from "fs";
+import admin from "firebase-admin";
+import { dirname } from "path";
 
-initializeApp();
+const __dirname = dirname(fileURLToPath(import.meta.url))
+
+var serviceAccount = JSON.parse(readFileSync(`${__dirname}/studytrack-82d9b-firebase-adminsdk-fbsvc-d4261bf7e4.json`))
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount)
+})
+
 const db = getFirestore();
 
 const app = express();
@@ -17,7 +26,13 @@ app.get("/", (req, res) => {
 /* CREATE */
 app.post("/salvar", async (req, res) => {
   try {
-    const data = req.body;
+
+    const { teste, legal } = req.body;
+
+    const data = { 
+      teste, 
+      legal, 
+    };
 
     const docRef = await db.collection("tarefas").add(data);
 
@@ -68,5 +83,5 @@ app.put("/editar/:id", async (req, res) => {
   }
 });
 
-/* EXPORT FIREBASE */
-exports.api = onRequest(app);
+const PORT = 3000;
+app.listen(PORT, () => console.log(`API rodando em http://localhost:${PORT}`));

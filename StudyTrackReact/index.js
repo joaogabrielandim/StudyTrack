@@ -7,7 +7,7 @@ import { dirname } from "path";
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
-var serviceAccount = JSON.parse(readFileSync(`${__dirname}/../../studytrack-82d9b-firebase-adminsdk-fbsvc-d4261bf7e4.json`))
+var serviceAccount = JSON.parse(readFileSync(`${__dirname}/../../studytrack-82d9b-firebase-adminsdk-fbsvc-af00119cfe.json`))
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)

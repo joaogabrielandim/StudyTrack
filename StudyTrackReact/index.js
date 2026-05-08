@@ -4,6 +4,7 @@ import { fileURLToPath} from "url";
 import { readFileSync } from "fs";
 import admin from "firebase-admin";
 import { dirname } from "path";
+import cors from "cors"
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
@@ -16,6 +17,9 @@ admin.initializeApp({
 const db = getFirestore();
 
 const app = express();
+
+app.use(cors());
+
 app.use(express.json());
 
 /* TESTE */

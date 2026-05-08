@@ -28,10 +28,11 @@ export function CreateUser(email, password, nome) {
     });
 }
 
-export function LoginUser(email, password, navigate) {
+export function LoginUser(email, password, navigate, loginAuth) {
     signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
         const user = userCredential.user;
+        loginAuth({ name: user.displayName, id: user.uid });
     })
     .then(() =>{
         navigate("/home")

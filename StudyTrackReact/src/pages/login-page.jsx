@@ -2,9 +2,11 @@ import "./login-page.css"
 import { Trocar, CreateUser, LoginUser } from "./login-page"
 import ImagemLogo from "../assets/logostsó.png"
 import { Navigate, useNavigate } from "react-router-dom";
+import { useAuth } from "react-auth-verification-context";
 
 function Login() {
     const navigate = useNavigate();
+    const { login } = useAuth();
 
     function cadastro(e) {
         e.preventDefault();
@@ -19,7 +21,7 @@ function Login() {
         e.preventDefault();
         const email = document.getElementById("email-login").value;
         const senha = document.getElementById("senha-login").value;
-        LoginUser(email,senha,navigate);
+        LoginUser(email,senha,navigate,login);
     }
 
     return (

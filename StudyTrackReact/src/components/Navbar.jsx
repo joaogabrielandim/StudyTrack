@@ -5,8 +5,11 @@ import calendaricon from "../assets/calendaricon.svg"
 import settingsicon from "../assets/settings.svg"
 import logouticon from "../assets/user-logout.svg"
 import { Link } from "react-router-dom"
+import { useAuth } from "react-auth-verification-context"
 
 function Navbar() {
+
+  const {logout} = useAuth();
 
   return (
     <section id="idnavbar" className="navbar">
@@ -34,7 +37,7 @@ function Navbar() {
             <img src={settingsicon} className="icon-small" /> 
             Configurações
           </button>
-          <button className="botao-perfil botao-logout">
+          <button onClick={logout} className="botao-perfil botao-logout">
             <img src={logouticon} className="icon-small" />
             Sair da conta
           </button>

@@ -33,10 +33,6 @@ function Navbar() {
         </div>
 
         <div className="acoes-usuario">
-          <button className="botao-perfil">
-            <img src={settingsicon} className="icon-small" /> 
-            Configurações
-          </button>
           <button onClick={logout} className="botao-perfil botao-logout">
             <img src={logouticon} className="icon-small" />
             Sair da conta

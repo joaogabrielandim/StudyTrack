@@ -22,12 +22,17 @@ const Modal = ({ isOpen, onClose }) => {
             <option>Programação</option>
           </select>
 
-          <label>Nivel de Foco</label>
-          <select style={styles.input}>
-            <option>Médio</option>
-            <option>Alto</option>
-            <option>Baixo</option>
-          </select>
+          <label>Duração da Sessão</label>
+          <div style={styles.containerTempo}>
+            <div style={styles.campoTempo}>
+              <input type="number" placeholder="0" min="0" style={styles.inputTempo} />
+              <span style={styles.labelTempo}>horas</span>
+            </div>
+            <div style={styles.campoTempo}>
+              <input type="number" placeholder="0" min="0" max="59" style={styles.inputTempo} />
+              <span style={styles.labelTempo}>min</span>
+            </div>
+          </div>
 
           <button type="button" style={styles.adicionarbotao}>Adicionar Sessão</button>
         </form>
@@ -47,6 +52,7 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    zIndex: 1000,
   },
   
   modal: {
@@ -54,7 +60,7 @@ const styles = {
     padding: '24px',
     borderRadius: '12px',
     width: '450px',
-    boxShadow: '0 4px 15px',
+    boxShadow: '0 4px 15px rgba(0, 0, 0, 0.2)',
   },
 
   header: {
@@ -62,7 +68,6 @@ const styles = {
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: '20px',
-    
   },
 
   form: {
@@ -72,13 +77,39 @@ const styles = {
   },
 
   input: {
-    width: '90%',
+    width: '100%',
     boxSizing: 'border-box',
     padding: '10px',
     borderRadius: '6px',
-    border: '1px solid',
+    border: '1px solid #ccc',
     marginBottom: '15px',
   },
+
+  containerTempo: {
+    display: 'flex',
+    gap: '15px',
+    marginBottom: '20px',
+  },
+
+  campoTempo: {
+    display: 'flex',
+    alignItems: 'center',
+    flex: 1,
+    gap: '8px',
+    border: '1px solid #ccc',
+    borderRadius: '6px',
+    padding: '5px 10px',
+  },
+
+  inputTempo: {
+    width: '100%',
+    border: 'none',
+    outline: 'none',
+    fontSize: '16px',
+    textAlign: 'right',
+  },
+
+  
 
   adicionarbotao: {
     backgroundColor: '#000',
@@ -86,7 +117,7 @@ const styles = {
     padding: '12px',
     borderRadius: '6px',
     border: 'none',
-    cursor: 'pointer',
+    fontWeight: 'bold',
   },
 
   fecharbotao: {
@@ -96,8 +127,9 @@ const styles = {
   },
 
   tituloModal: {
-  color: 'black',
-  margin: 0,
+    color: 'black',
+    margin: 0,
+    fontWeight: 'bold',
   } 
 };
 

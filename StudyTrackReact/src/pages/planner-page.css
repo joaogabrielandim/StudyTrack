@@ -55,7 +55,7 @@ h2{
 .calendario-planner{
     flex: 1;
     margin: 20px;
-    height: 100vh;
+    height: 80vh;
 }
 
 .calendario-planner iframe{
@@ -65,12 +65,25 @@ h2{
 
 .planner-container-restrito {
     width: 100%;
-    max-width: 800px; 
+    max-width: 1100px; 
     display: flex;
-    flex-direction: column;
-    gap: 24px;
+    flex-direction: row; 
+    align-items: flex-start; 
+    gap: 30px; 
+    margin: 0 auto;
 }
 
-.planner-container-restrito > div {
-    width: 100%;
+.col-tarefas {
+    flex: 0 0 320px; 
+}
+
+
+.col-calendario {
+    flex: 1; 
+    min-width: 400px;
+}
+
+
+.planner-container-restrito > div > div {
+    width: 100% !important;
 }

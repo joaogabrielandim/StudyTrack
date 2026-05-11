@@ -400,6 +400,7 @@ export default function CalendarChecklist() {
          <Navbar />
          <main className="conteudo-planner">
          <div className="planner-container-restrito">
+            <div className="col-tarefas">
       <Calendar
         tasks={tasks}
         year={viewYear}
@@ -407,9 +408,12 @@ export default function CalendarChecklist() {
         onPrev={prevMonth}
         onNext={nextMonth}
       />
+      </div>
+        <div className="col-calendario">
       <Checklist tasks={tasks} onToggle={handleToggle} onAdd={handleAdd} />
          </div>
-    </main>
-    </div>
+         </div>
+         </main>
+         </div>
   );
 }

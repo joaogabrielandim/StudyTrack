@@ -1,7 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react'; // useState faltava
+import api from "../services/api";
 
 const Modal2 = ({ isOpen2, onClose2 }) => {
-  if (!isOpen2) return null; 
+  const [titulo, setTitulo] = useState("");
+  const [materia, setMateria] = useState("");
+  const [prioridade, setPrioridade] = useState("Média"); // valor inicial
+
+  if (!isOpen2) return null; // deve vir DEPOIS dos hooks
+
+  const handleSubmit = async () => {
+    try {
+      await api.post("/salvar", {
+        titulo,
+        materia,
+        prioridade,
+      });
+
+      // Limpar campos e fechar modal após salvar
+      setTitulo("");
+      setMateria("");
+      setPrioridade("Média");
+      onClose2();
+    } catch (error) {
+      console.error("Erro ao salvar tarefa:", error);
+    }
+  };
 
   return (
     <div style={styles2.overlay}>
@@ -11,26 +34,38 @@ const Modal2 = ({ isOpen2, onClose2 }) => {
           <button onClick={onClose2} style={styles2.fecharbotao}>&times;</button>
         </div>
         
-        <form style={styles2.form}>
+        <div style={styles2.form}>
           <label>Titulo da Tarefa</label>
-          <input type="text" style={styles2.input} />
+          <input 
+            type="text" 
+            value={titulo}
+            onChange={(e) => setTitulo(e.target.value)} // onChange faltava
+            style={styles2.input} 
+          />
           
           <label>Matéria</label>
-          <select style={styles2.input}>
-            <option>Selecione uma matéria</option>
-            <option>Matemática</option>
-            <option>Programação</option>
-          </select>
+          <input 
+            type="text"
+            value={materia}
+            onChange={(e) => setMateria(e.target.value)} // onChange faltava
+            style={styles2.input} 
+          />
 
           <label>Nivel de Prioridade</label>
-          <select style={styles2.input}>
+          <select 
+            value={prioridade}
+            onChange={(e) => setPrioridade(e.target.value)} // onChange faltava
+            style={styles2.input}
+          >
             <option>Média</option>
             <option>Alta</option>
             <option>Baixa</option>
           </select>
 
-          <button type="button" style={styles2.adicionarbotao}>Adicionar Tarefa</button>
-        </form>
+          <button type="button" onClick={handleSubmit} style={styles2.adicionarbotao}>
+            Adicionar Tarefa
+          </button>
+        </div>
       </div>
     </div>
   );

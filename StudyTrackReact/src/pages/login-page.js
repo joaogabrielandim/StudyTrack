@@ -6,6 +6,7 @@ export function CreateUser(email, password, nome) {
     createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
         const user = userCredential.user;
+        alert("Cadastro realizado com sucesso!");
 
         return updateProfile(user, {
             displayName: nome

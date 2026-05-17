@@ -1,15 +1,15 @@
-labor {
+label {
     display: block;
     font-family: sans-serif;
     font-size: 15px;
 }
 
-#studytrackimg {
+#studytrackimg-login {
     display: flex;
 }
 
-#imagem_logo {
-    height: 100px;
+#imagem_logo-login {
+    height: 57px;
 }
 
 a {
@@ -22,25 +22,26 @@ a {
     text-decoration: none;
 }
 
-.titulo_article {
+.titulo_article-login {
     align-self: flex-start;
     padding-left: 20px;
-
+    margin-bottom: 20px;
+    margin-top:20px;
 }
 
-.titulo {
+.titulo-login {
     font-weight: bold;
     font-family: sans-serif;
     border-radius: 5px;
 }
 
-#titulo2 {
+#titulo2-login {
     text-align: left;
     font-family: sans-serif;
     color:#9d9d9d
 }
 
-#cadastrar {
+#cadastrar-login {
     margin-top: 10px;
     display: block;
     background: linear-gradient(to right, #48d1bf,#318e6f);
@@ -59,19 +60,19 @@ input {
     border-radius: 5px;
 }
 
-#cadastro {
+#cadastro-login {
     display: flex;
     flex-direction: column;
-    align-items:center;
+    align-items: center;
     width: 500px;
     height: 48vh;
     background-color:#ffffff;
     border-radius: 5px;
-    box-shadow: 0 10px 16px rgba(0,0,0,0.15);
+    box-shadow: 0 10px 16px rgba(0, 0, 0, 0.15);
     margin-left: 100px;
 }
 
-#cadastro2 {
+#cadastro2-login {
     display: none;
     flex-direction: column;
     align-items: center;
@@ -83,25 +84,28 @@ input {
     margin-left: 100px
 }
 
-
 main {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-color:#ebfff9;
+    background-color:#ffffff;
 }
 
-.fontesans {
+.fontesans-login {
     font-family: sans-serif;
 }
 
-#studytrack {
+#studytrack-login {
     font-weight: bold;
     font-size: 50px;
     color: #2c7f63;
 }
 
-#descricao {
+#descricao-login {
     color:#9d9d9d;
+}
+
+#cadastrar-login:hover {
+    opacity: 0.9;
 }

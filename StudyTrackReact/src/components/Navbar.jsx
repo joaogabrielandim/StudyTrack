@@ -2,14 +2,24 @@ import "./Navbar.css"
 import homeicon from "../assets/homeicon.svg"
 import taskicon from "../assets/taskicon.svg"
 import calendaricon from "../assets/calendaricon.svg"
-import settingsicon from "../assets/settings.svg"
 import logouticon from "../assets/user-logout.svg"
 import { Link } from "react-router-dom"
 import { useAuth } from "react-auth-verification-context"
+import { useState, useEffect } from "react"
+import { auth } from "../firebase"
 
 function Navbar() {
+  const { logout } = useAuth();
+  const [user, setUser] = useState(null);
 
-  const {logout} = useAuth();
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((firebaseUser) => {
+      setUser(firebaseUser);
+    });
+    return () => unsubscribe(); // limpa o listener ao desmontar
+  }, []);
+
+  const inicial = user?.displayName?.charAt(0) || user?.email?.charAt(0) || "?"
 
   return (
     <section id="idnavbar" className="navbar">
@@ -25,10 +35,10 @@ function Navbar() {
 
       <div className="perfil-usuario">
         <div className="user-info-wrapper">
-          <div className="avatar">J</div>
+          <div className="avatar">{inicial}</div>
           <div className="info-usuario">
-          <div className="nome">João: o Camarão</div>
-            <div className="email">joaogadelha@gmail.com</div>
+            <div className="nome">{user?.displayName || "Usuário"}</div>
+            <div className="email">{user?.email || ""}</div>
           </div>
         </div>
 

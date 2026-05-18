@@ -323,10 +323,10 @@ function Checklist({ tasks, onToggle, onAdd }) {
 
   return (
     <div style={s.panel}>
-      <div style={s.panelTitle}>Tarefas</div>
+      <div style={s.panelTitle}>Eventos</div>
       <div style={s.taskList}>
         {active.length === 0 ? (
-          <div style={s.empty}>Nenhuma tarefa pendente 🎉</div>
+          <div style={s.empty}>Nenhum evento pendente 🎉</div>
         ) : (
           active.map((t) => (
             <TaskItem key={t.id} task={t} onToggle={onToggle} />
@@ -336,7 +336,7 @@ function Checklist({ tasks, onToggle, onAdd }) {
       <div style={s.addRow}>
         <input
           style={s.addInput}
-          placeholder="Nova tarefa..."
+          placeholder="Novo evento..."
           value={name}
           maxLength={40}
           onChange={(e) => setName(e.target.value)}
@@ -349,7 +349,7 @@ function Checklist({ tasks, onToggle, onAdd }) {
           onChange={(e) => setDate(e.target.value)}
         />
         <button style={s.addBtn} onClick={handleAdd}>
-          + Add
+          +
         </button>
       </div>
     </div>

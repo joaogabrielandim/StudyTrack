@@ -1,89 +1,48 @@
-.body-planner{
+.body-planner {
     background-color: #fafafa;
     font-family: Arial, sans-serif;
-    display:flex;
+    display: flex;
     height: 100vh;
     width: 100%;
-}
-h2{
-    color: green;
+    overflow: hidden;
 }
 
-.principal-planner { 
-    margin: 20px;
-    display: block;
-    width: 300px;
-    height: 100vh;
-}
-
-.conteudo-planner{
-    flex: 1; 
-    display: flex;
-    justify-content: center; 
-    padding: 40px 20px;
-    overflow-y: auto;
-}
-
-.tarefas-planner{
-    padding: 10px;
-    background: #ffffff;
-    border: 1px solid #eee;
-    border-radius: 12px;
-    margin-bottom: 20px;
-    height: 300px;
-
-    h2{
-        margin: 0 0 20px 0;
-        font-size: 20px;
-        color: #333;
-    }
-}
-
-.eventos-planner{
-    padding: 10px;
-    background: #ffffff;
-    border: 1px solid #eee;
-    border-radius: 12px;
-    height: 350px;
-
-    h2{
-        margin: 0 0 20px 0;
-        font-size: 20px;
-        color: #333;
-    }
-}
-.calendario-planner{
+.conteudo-planner {
     flex: 1;
-    margin: 20px;
-    height: 80vh;
-}
-
-.calendario-planner iframe{
-    border: none;
-    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    padding: 32px 24px;
+    overflow-y: auto;
+    height: 100vh;
+    box-sizing: border-box;
 }
 
 .planner-container-restrito {
     width: 100%;
-    max-width: 1100px; 
+    flex: 1;                    /* ← ocupa toda a altura restante */
     display: flex;
-    flex-direction: row; 
-    align-items: flex-start; 
-    gap: 30px; 
-    margin: 0 auto;
+    flex-direction: row;
+    align-items: stretch;       /* ← faz as colunas terem a mesma altura */
+    gap: 24px;
 }
 
 .col-tarefas {
-    flex: 0 0 320px; 
+    flex: 0 0 340px;
+    display: flex;
+    flex-direction: column;
 }
-
 
 .col-calendario {
-    flex: 1; 
-    min-width: 400px;
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
 }
 
-
-.planner-container-restrito > div > div {
-    width: 100% !important;
+/* faz os painéis internos crescerem para preencher a coluna */
+.col-tarefas > div,
+.col-calendario > div {
+    flex: 1;
+    display: flex !important;
+    flex-direction: column !important;
 }

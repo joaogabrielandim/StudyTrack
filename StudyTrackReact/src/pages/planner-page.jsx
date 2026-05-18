@@ -142,6 +142,7 @@ function Checklist({ tasks, loading, error, onToggle, onAdd }) {
 
   return (
     <div style={s.panel}>
+<<<<<<< HEAD
       <div style={s.panelTitle}>Tarefas</div>
       {error && <div style={s.errorMsg}>{error}</div>}
       <div style={s.taskList}>
@@ -149,16 +150,42 @@ function Checklist({ tasks, loading, error, onToggle, onAdd }) {
           <div style={s.loadingMsg}>Carregando tarefas…</div>
         ) : active.length === 0 ? (
           <div style={s.empty}>Nenhuma tarefa pendente 🎉</div>
+=======
+      <div style={s.panelTitle}>Eventos</div>
+      <div style={s.taskList}>
+        {active.length === 0 ? (
+          <div style={s.empty}>Nenhum evento pendente 🎉</div>
+>>>>>>> camarao-2
         ) : (
           active.map((t) => <TaskItem key={t.id} task={t} onToggle={onToggle} />)
         )}
       </div>
       <div style={s.addRow}>
+<<<<<<< HEAD
         <input style={s.addInput} placeholder="Nova tarefa..." value={name} maxLength={40}
           onChange={(e) => setName(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && handleAdd()} />
         <input style={s.addDate} type="date" value={date} onChange={(e) => setDate(e.target.value)} />
         <button style={s.addBtn} onClick={handleAdd}>+ Add</button>
+=======
+        <input
+          style={s.addInput}
+          placeholder="Novo evento..."
+          value={name}
+          maxLength={40}
+          onChange={(e) => setName(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && handleAdd()}
+        />
+        <input
+          style={s.addDate}
+          type="date"
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
+        />
+        <button style={s.addBtn} onClick={handleAdd}>
+          +
+        </button>
+>>>>>>> camarao-2
       </div>
     </div>
   );

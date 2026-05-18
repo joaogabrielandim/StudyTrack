@@ -1,18 +1,16 @@
-import Navbar from "../components/Navbar"
-import Homejs from "./home-page"
-import "./home-page.css"
+import Navbar from "../components/Navbar";
+import Homejs from "./home-page";
+import "./home-page.css";
 
-function Home({ abrirModal }) {
+function Home({ abrirModal, sessoes, onDeletar }) {
+  const { dataCompleta } = Homejs();
 
-const { dataCompleta } = Homejs();
-
-    return (
+  return (
     <div className="container-principal">
- 
       <Navbar />
- 
+
       <div className="conteudo-principal">
- 
+
         <div className="cabecalho">
           <div className="texto-boas-vindas">
             <div className="titulo-boas-vindas">Bem-vindo! 👋</div>
@@ -23,18 +21,31 @@ const { dataCompleta } = Homejs();
             <div className="data-completa"><strong>{dataCompleta}</strong></div>
           </div>
         </div>
- 
+
         <div id="div-botao">
           <button id="botao-sessao" onClick={abrirModal}>
             Adicionar Sessão
           </button>
         </div>
- 
+
         <div id="sessao-estudos">
-          <div className="estudos">
-          </div>
+          {sessoes.map((sessao) => (
+            <div key={sessao.id} className="card-sessao">
+              <button
+                className="card-sessao-deletar"
+                onClick={() => onDeletar(sessao.id)}
+              >
+                ✕
+              </button>
+              <div className="card-sessao-materia">{sessao.materia}</div>
+              <div className="card-sessao-info">
+                <span>📚 {sessao.tempoEstudo}</span>
+                <span>⏱ {sessao.horas}h {sessao.minutos}min</span>
+              </div>
+            </div>
+          ))}
         </div>
- 
+
         <div className="linha-estatisticas">
           <div className="cartao">
             <div className="titulo-cartao">Horas de Estudo</div>
@@ -53,7 +64,7 @@ const { dataCompleta } = Homejs();
             <div className="valor-cartao"></div>
           </div>
         </div>
- 
+
         <div className="linha-conteudo">
           <div className="caixa-conteudo">
             <div className="titulo-caixa">Horas de Estudo</div>
@@ -64,7 +75,7 @@ const { dataCompleta } = Homejs();
             <div className="espaco-reservado">[Área do Gráfico de Rosca]</div>
           </div>
         </div>
- 
+
         <div className="linha-conteudo">
           <div className="caixa-conteudo">
             <div className="titulo-caixa">Tarefas Recentes</div>
@@ -75,10 +86,10 @@ const { dataCompleta } = Homejs();
             <div className="espaco-reservado">[Área da Lista de Sessões]</div>
           </div>
         </div>
- 
+
       </div>
     </div>
-    )
+  );
 }
 
-export default Home
+export default Home;

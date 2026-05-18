@@ -1,7 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const Modal = ({ isOpen, onClose }) => {
-  if (!isOpen) return null; 
+const Modal = ({ isOpen, onClose, onAdicionarSessao }) => {
+  const [tempoEstudo, setTempoEstudo] = useState('');
+  const [materia, setMateria] = useState('Selecione uma matéria');
+  const [horas, setHoras] = useState(0);
+  const [minutos, setMinutos] = useState(0);
+
+  if (!isOpen) return null;
+
+  const handleAdicionar = () => {
+    if (!tempoEstudo || materia === 'Selecione uma matéria') return;
+
+    onAdicionarSessao({
+      id: Date.now(),
+      tempoEstudo,
+      materia,
+      horas,
+      minutos,
+    });
+
+    setTempoEstudo('');
+    setMateria('Selecione uma matéria');
+    setHoras(0);
+    setMinutos(0);
+    onClose();
+  };
 
   return (
     <div style={styles.overlay}>
@@ -10,13 +33,22 @@ const Modal = ({ isOpen, onClose }) => {
           <h2 style={styles.tituloModal}>Nova Sessão</h2>
           <button onClick={onClose} style={styles.fecharbotao}>&times;</button>
         </div>
-        
+
         <form style={styles.form}>
           <label>Tempo de Estudo</label>
-          <input type="text" style={styles.input} />
-          
+          <input
+            type="text"
+            style={styles.input}
+            value={tempoEstudo}
+            onChange={(e) => setTempoEstudo(e.target.value)}
+          />
+
           <label>Matéria</label>
-          <select style={styles.input}>
+          <select
+            style={styles.input}
+            value={materia}
+            onChange={(e) => setMateria(e.target.value)}
+          >
             <option>Selecione uma matéria</option>
             <option>Matemática</option>
             <option>Programação</option>
@@ -25,16 +57,32 @@ const Modal = ({ isOpen, onClose }) => {
           <label>Duração da Sessão</label>
           <div style={styles.containerTempo}>
             <div style={styles.campoTempo}>
-              <input type="number" placeholder="0" min="0" style={styles.inputTempo} />
+              <input
+                type="number"
+                placeholder="0"
+                min="0"
+                style={styles.inputTempo}
+                value={horas}
+                onChange={(e) => setHoras(e.target.value)}
+              />
               <span style={styles.labelTempo}>horas</span>
             </div>
             <div style={styles.campoTempo}>
-              <input type="number" placeholder="0" min="0" max="59" style={styles.inputTempo} />
+              <input
+                type="number"
+                placeholder="0"
+                min="0"
+                max="59"
+                style={styles.inputTempo}
+                value={minutos}
+                onChange={(e) => setMinutos(e.target.value)}
+              />
               <span style={styles.labelTempo}>min</span>
             </div>
           </div>
-
-          <button type="button" style={styles.adicionarbotao}>Adicionar Sessão</button>
+          <button type="button" style={styles.adicionarbotao} onClick={handleAdicionar}>
+            Adicionar Sessão
+          </button>
         </form>
       </div>
     </div>
@@ -54,7 +102,6 @@ const styles = {
     justifyContent: 'center',
     zIndex: 1000,
   },
-  
   modal: {
     backgroundColor: 'white',
     padding: '24px',
@@ -62,20 +109,17 @@ const styles = {
     width: '450px',
     boxShadow: '0 4px 15px rgba(0, 0, 0, 0.2)',
   },
-
   header: {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: '20px',
   },
-
   form: {
     display: 'flex',
     flexDirection: 'column',
     gap: '10px',
   },
-
   input: {
     width: '100%',
     boxSizing: 'border-box',
@@ -84,13 +128,11 @@ const styles = {
     border: '1px solid #ccc',
     marginBottom: '15px',
   },
-
   containerTempo: {
     display: 'flex',
     gap: '15px',
     marginBottom: '20px',
   },
-
   campoTempo: {
     display: 'flex',
     alignItems: 'center',
@@ -100,7 +142,6 @@ const styles = {
     borderRadius: '6px',
     padding: '5px 10px',
   },
-
   inputTempo: {
     width: '100%',
     border: 'none',
@@ -108,9 +149,6 @@ const styles = {
     fontSize: '16px',
     textAlign: 'right',
   },
-
-  
-
   adicionarbotao: {
     backgroundColor: '#000',
     color: 'white',
@@ -118,19 +156,19 @@ const styles = {
     borderRadius: '6px',
     border: 'none',
     fontWeight: 'bold',
+    cursor: 'pointer',
   },
-
   fecharbotao: {
     background: 'none',
     border: 'none',
     fontSize: '24px',
+    cursor: 'pointer',
   },
-
   tituloModal: {
     color: 'black',
     margin: 0,
     fontWeight: 'bold',
-  } 
+  }
 };
 
 export default Modal;

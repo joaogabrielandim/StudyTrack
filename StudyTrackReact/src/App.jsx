@@ -9,11 +9,11 @@ import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom'
 import { AuthProvider, useAuth } from 'react-auth-verification-context'
 import CalendarChecklist from "./pages/planner-page.jsx";
 
-
 function AppNavigation() {
-  const { isAuthenticated, login, logout } = useAuth();
+  const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [sessoes, setSessoes] = useState([]);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -23,21 +23,35 @@ function AppNavigation() {
     }
   }, [isAuthenticated]);
 
+  const handleAdicionarSessao = (novaSessao) => {
+    setSessoes((prev) => [novaSessao, ...prev]);
+  };
+
+  const handleDeletarSessao = (id) => {
+    setSessoes((prev) => prev.filter((s) => s.id !== id));
+  };
+
   return (
     <>
       <Routes>
         <Route path="/" element={<Login />} />
         <Route
           path="/home"
-          element={<Home abrirModal={() => setIsModalOpen(true)} />}
+          element={
+            <Home
+              abrirModal={() => setIsModalOpen(true)}
+              sessoes={sessoes}
+              onDeletar={handleDeletarSessao}
+            />
+          }
         />
         <Route path="/tarefas" element={<Task />} />
         <Route path="/calendario" element={<CalendarChecklist />} />
       </Routes>
-
       <Modal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
+        onAdicionarSessao={handleAdicionarSessao}
       />
     </>
   );

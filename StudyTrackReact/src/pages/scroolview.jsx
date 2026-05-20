@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { db } from '../firebase';
+import { collection, addDoc, Timestamp } from 'firebase/firestore';
 
 const Modal = ({ isOpen, onClose, onAdicionarSessao }) => {
   const [tempoEstudo, setTempoEstudo] = useState('');
@@ -8,16 +10,23 @@ const Modal = ({ isOpen, onClose, onAdicionarSessao }) => {
 
   if (!isOpen) return null;
 
-  const handleAdicionar = () => {
+  const handleAdicionar = async () => {
     if (!tempoEstudo || materia === 'Selecione uma matéria') return;
 
-    onAdicionarSessao({
-      id: Date.now(),
+    const novaSessao = {
       tempoEstudo,
       materia,
-      horas,
-      minutos,
-    });
+      horas: Number(horas),
+      minutos: Number(minutos),
+      criadoEm: Timestamp.now(),
+    };
+
+    try {
+      const docRef = await addDoc(collection(db, 'sessoes'), novaSessao);
+      onAdicionarSessao({ id: docRef.id, ...novaSessao });
+    } catch (err) {
+      console.error('Erro ao salvar sessão:', err);
+    }
 
     setTempoEstudo('');
     setMateria('Selecione uma matéria');

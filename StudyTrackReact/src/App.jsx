@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 import Login from "./pages/login-page.jsx"
-import Navbar from "./components/Navbar.jsx"
 import Home from "./pages/home-page.jsx"
 import Task from "./pages/task-page.jsx"
 import Modal from "./pages/scroolview.jsx"
@@ -14,6 +13,7 @@ function AppNavigation() {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [sessoes, setSessoes] = useState([]);
+  const [recarregarStats, setRecarregarStats] = useState(0);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -25,6 +25,7 @@ function AppNavigation() {
 
   const handleAdicionarSessao = (novaSessao) => {
     setSessoes((prev) => [novaSessao, ...prev]);
+    setRecarregarStats(prev => prev + 1); // dispara recarregamento dos cartões
   };
 
   const handleDeletarSessao = (id) => {
@@ -42,6 +43,7 @@ function AppNavigation() {
               abrirModal={() => setIsModalOpen(true)}
               sessoes={sessoes}
               onDeletar={handleDeletarSessao}
+              recarregarStats={recarregarStats}
             />
           }
         />
@@ -67,4 +69,4 @@ function App() {
   );
 }
 
-export default App
+export default App;

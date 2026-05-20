@@ -2,8 +2,8 @@ import Navbar from "../components/Navbar";
 import Homejs from "./home-page";
 import "./home-page.css";
 
-function Home({ abrirModal, sessoes, onDeletar }) {
-  const { dataCompleta } = Homejs();
+function Home({ abrirModal, sessoes, onDeletar, recarregarStats }) {
+  const { dataCompleta, horasEstudo, tarefasConcluidas, sessoesHoje, sequencia } = Homejs(recarregarStats);
 
   return (
     <div className="container-principal">
@@ -49,19 +49,19 @@ function Home({ abrirModal, sessoes, onDeletar }) {
         <div className="linha-estatisticas">
           <div className="cartao">
             <div className="titulo-cartao">Horas de Estudo</div>
-            <div className="valor-cartao"></div>
+            <div className="valor-cartao">{horasEstudo}</div>
           </div>
           <div className="cartao">
             <div className="titulo-cartao">Tarefas Concluídas</div>
-            <div className="valor-cartao"></div>
+            <div className="valor-cartao">{tarefasConcluidas}</div>
           </div>
           <div className="cartao">
             <div className="titulo-cartao">Sessões de Estudo</div>
-            <div className="valor-cartao"></div>
+            <div className="valor-cartao">{sessoesHoje}</div>
           </div>
           <div className="cartao">
             <div className="titulo-cartao">Sequência</div>
-            <div className="valor-cartao"></div>
+            <div className="valor-cartao">{sequencia} 🔥</div>
           </div>
         </div>
 

@@ -142,13 +142,13 @@ function Checklist({ tasks, loading, error, onToggle, onAdd }) {
 
   return (
     <div style={s.panel}>
-      <div style={s.panelTitle}>Tarefas</div>
+      <div style={s.panelTitle}>Eventos</div>
       {error && <div style={s.errorMsg}>{error}</div>}
       <div style={s.taskList}>
         {loading ? (
-          <div style={s.loadingMsg}>Carregando tarefas…</div>
+          <div style={s.loadingMsg}>Carregando eventos…</div>
         ) : active.length === 0 ? (
-          <div style={s.empty}>Nenhuma tarefa pendente 🎉</div>
+          <div style={s.empty}>Nenhum evento pendente 🎉</div>
         ) : (
           active.map((t) => <TaskItem key={t.id} task={t} onToggle={onToggle} />)
         )}
@@ -158,7 +158,7 @@ function Checklist({ tasks, loading, error, onToggle, onAdd }) {
           onChange={(e) => setName(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && handleAdd()} />
         <input style={s.addDate} type="date" value={date} onChange={(e) => setDate(e.target.value)} />
-        <button style={s.addBtn} onClick={handleAdd}>+ Add</button>
+        <button style={s.addBtn} onClick={handleAdd}>+</button>
       </div>
     </div>
   );

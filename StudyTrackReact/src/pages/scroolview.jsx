@@ -3,9 +3,7 @@ import { db } from '../firebase';
 import { collection, addDoc, Timestamp } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 
-// ── IMPORTANTE: onAdicionarSessao agora recebe a sessão salva e dispara
-// o recarregarStats no componente pai (App ou index), que é passado para
-// o hook Homejs, fazendo os gráficos atualizarem automaticamente.
+
 
 const Modal = ({ isOpen, onClose, onAdicionarSessao }) => {
   const [tempoEstudo, setTempoEstudo] = useState('');
@@ -34,12 +32,12 @@ const Modal = ({ isOpen, onClose, onAdicionarSessao }) => {
       horas: Number(horas),
       minutos: Number(minutos),
       criadoEm: Timestamp.now(),
-      uid, // ← campo necessário para filtrar por usuário nos gráficos
+      uid, 
     };
 
     try {
       const docRef = await addDoc(collection(db, 'sessoes'), novaSessao);
-      // Passa a sessão completa com id para o pai atualizar a lista e os gráficos
+      
       onAdicionarSessao({ id: docRef.id, ...novaSessao });
     } catch (err) {
       console.error('Erro ao salvar sessão:', err);
@@ -73,22 +71,13 @@ const Modal = ({ isOpen, onClose, onAdicionarSessao }) => {
           />
 
           <label>Matéria</label>
-          <select
-            style={styles.input}
+          <label style={{fontWeight: '500'}}>Matéria</label>
+          <input 
+            type="text"
             value={materia}
             onChange={(e) => setMateria(e.target.value)}
-          >
-            <option>Selecione uma matéria</option>
-            <option>Matemática</option>
-            <option>Programação</option>
-            <option>Física</option>
-            <option>Química</option>
-            <option>Português</option>
-            <option>História</option>
-            <option>Geografia</option>
-            <option>Inglês</option>
-            <option>Outra</option>
-          </select>
+            style={styles2.input} 
+          />
 
           <label>Duração da Sessão</label>
           <div style={styles.containerTempo}>

@@ -57,7 +57,6 @@ function Homejs(recarregarStats = 0) {
       const fimDia = new Date();
       fimDia.setHours(23, 59, 59, 999);
 
-      // ── 1. Sessões de hoje (Firebase) ──────────────────────────────────────
       const qSessoes = query(
         collection(db, "sessoes"),
         where("uid", "==", uid),
@@ -88,17 +87,12 @@ function Homejs(recarregarStats = 0) {
       setSessoesHoje(snapSessoes.size);
       setProximasSessoes(sessoesHojeList);
 
-      // ── 2. Tarefas concluídas (API REST) ───────────────────────────────────
-      // CORREÇÃO: tarefas antigas no Firestore não têm o campo "concluida",
-      // então ele vem como undefined. Usamos Boolean() para normalizar
-      // undefined → false, null → false, true → true, 1 → true, "true" → false
-      // Para cobrir o caso de string "true" também checamos explicitamente.
       try {
         const { data: todasTarefas } = await api.get("/listar");
 
         const concluidas = todasTarefas.filter((t) => {
           const val = t.concluida;
-          // Cobre: true (boolean), 1 (inteiro), "true" (string), e ignora undefined/null/false
+      
           return val === true || val === 1 || val === "true";
         });
 
@@ -116,7 +110,6 @@ function Homejs(recarregarStats = 0) {
         setTarefasRecentes([]);
       }
 
-      // ── 3. Gráfico de barras — últimos 7 dias (Firebase) ──────────────────
       const diasLabels = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
       const hoje = new Date();
       const ultimos7 = [];
@@ -164,7 +157,6 @@ function Homejs(recarregarStats = 0) {
         }))
       );
 
-      // ── 4. Gráfico de rosca — por matéria (Firebase) ──────────────────────
       const materiaMap = {};
       snapSemana.forEach((d) => {
         const s = d.data();

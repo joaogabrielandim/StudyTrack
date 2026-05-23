@@ -21,7 +21,7 @@ function fmtDate(d) {
 const today = new Date();
 const todayStr = fmtDate(today);
 
-// Mapeia tarefa da API → formato interno do componente
+
 function fromApi(doc, idx) {
   return {
     id: doc.id,
@@ -32,7 +32,7 @@ function fromApi(doc, idx) {
   };
 }
 
-// ─── styles (igual ao seu original) ──────────────────────────────────────────
+
 const s = {
   wrap: { display: "grid", gridTemplateColumns: "1fr", gap: 16, fontFamily: "system-ui, sans-serif" },
   panel: { background: "#fff", border: "1px solid #e5e7eb", borderRadius: 12, padding: "1.25rem" },
@@ -62,7 +62,6 @@ const s = {
   errorMsg: { fontSize: 13, color: "#D85A30", textAlign: "center", padding: "0.5rem 0" },
 };
 
-// ─── sub-componentes (iguais ao seu original) ─────────────────────────────────
 
 function CheckCircle({ checked, onClick }) {
   return (
@@ -164,7 +163,6 @@ function Checklist({ tasks, loading, error, onToggle, onAdd }) {
   );
 }
 
-// ─── main export ──────────────────────────────────────────────────────────────
 
 export default function CalendarChecklist() {
   const [tasks, setTasks] = useState([]);
@@ -174,7 +172,7 @@ export default function CalendarChecklist() {
   const [viewYear, setViewYear] = useState(today.getFullYear());
   const [viewMonth, setViewMonth] = useState(today.getMonth());
 
-  // Carrega tarefas da API ao montar
+
   useEffect(() => {
     async function fetchTasks() {
       try {
@@ -193,7 +191,7 @@ export default function CalendarChecklist() {
     fetchTasks();
   }, []);
 
-  // Marca como concluída → PUT na API + remove visualmente
+
   const handleToggle = useCallback(async (id) => {
   try {
     await api.delete(`/deletar/${id}`);
@@ -204,14 +202,14 @@ export default function CalendarChecklist() {
   }
 }, []);
 
-  // Adiciona → POST na API → adiciona no estado com o id retornado
+
   const handleAdd = useCallback(async (name, date) => {
     try {
       const { data } = await api.post("/salvar", {
         titulo: name,
         data: date,
-        materia: "",       // campo obrigatório na sua API; ajuste se quiser coletar do usuário
-        prioridade: "normal", // idem
+        materia: "",       
+        prioridade: "normal", 
         concluida: false,
       });
       const newTask = {

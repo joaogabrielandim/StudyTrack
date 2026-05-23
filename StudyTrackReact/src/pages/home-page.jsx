@@ -62,7 +62,7 @@ function EmptyChart({ mensagem }) {
   );
 }
 
-// Skeleton para cards de estatísticas durante carregamento
+
 function StatCardSkeleton() {
   return (
     <div className="cartao" style={{ opacity: 0.5 }}>
@@ -103,7 +103,7 @@ function Home({ abrirModal, sessoes, onDeletar, recarregarStats }) {
 
       <div className="conteudo-principal">
 
-        {/* Cabeçalho */}
+       
         <div className="cabecalho">
           <div className="texto-boas-vindas">
             <div className="titulo-boas-vindas">Bem-vindo! 👋</div>
@@ -115,14 +115,14 @@ function Home({ abrirModal, sessoes, onDeletar, recarregarStats }) {
           </div>
         </div>
 
-        {/* Botão adicionar sessão */}
+       
         <div id="div-botao">
           <button id="botao-sessao" onClick={abrirModal}>
             Adicionar Sessão
           </button>
         </div>
 
-        {/* Cards de sessões recém adicionadas — só renderiza se houver sessões */}
+   
         {sessoes.length > 0 && (
           <div id="sessao-estudos">
             {sessoes.map((sessao) => (
@@ -143,7 +143,7 @@ function Home({ abrirModal, sessoes, onDeletar, recarregarStats }) {
           </div>
         )}
 
-        {/* Cartões de estatísticas */}
+      
         <div className="linha-estatisticas">
           {carregando ? (
             <>
@@ -174,10 +174,10 @@ function Home({ abrirModal, sessoes, onDeletar, recarregarStats }) {
           )}
         </div>
 
-        {/* Linha de gráficos */}
+       
         <div className="linha-conteudo">
 
-          {/* Gráfico de Barras */}
+      
           <div className="caixa-conteudo">
             <div className="titulo-caixa">Horas de Estudo (últimos 7 dias)</div>
             <div style={{ width: "100%", height: 220 }}>
@@ -209,7 +209,7 @@ function Home({ abrirModal, sessoes, onDeletar, recarregarStats }) {
             </div>
           </div>
 
-          {/* Gráfico de Rosca */}
+       
           <div className="caixa-conteudo">
             <div className="titulo-caixa">Distribuição por Matéria</div>
             <div style={{ width: "100%", height: 220 }}>
@@ -248,10 +248,10 @@ function Home({ abrirModal, sessoes, onDeletar, recarregarStats }) {
           </div>
         </div>
 
-        {/* Linha de listas */}
+       
         <div className="linha-conteudo">
 
-          {/* Tarefas Recentes */}
+         
           <div className="caixa-conteudo">
             <div className="titulo-caixa">Tarefas Recentes</div>
             {carregando ? (
@@ -300,7 +300,7 @@ function Home({ abrirModal, sessoes, onDeletar, recarregarStats }) {
             )}
           </div>
 
-          {/* Sessões de hoje */}
+
           <div className="caixa-conteudo">
             <div className="titulo-caixa">Sessões de Hoje</div>
             {carregando ? (

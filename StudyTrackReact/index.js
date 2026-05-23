@@ -34,7 +34,7 @@ const autenticarUsuario = async (req, res, next) => {
 
   try {
     const decoded = await admin.auth().verifyIdToken(token);
-    req.uid = decoded.uid; // UID disponível nas rotas
+    req.uid = decoded.uid; 
     next();
   } catch (err) {
     res.status(401).json({ erro: "Token inválido" });
@@ -43,7 +43,7 @@ const autenticarUsuario = async (req, res, next) => {
 
 app.post("/salvar", autenticarUsuario, async (req, res) => {
   try {
-    const { titulo, materia, prioridade } = req.body; // campos atualizados
+    const { titulo, materia, prioridade } = req.body; 
 
     const docRef = await db.collection("usuarios").doc(req.uid)
       .collection("tarefas").add({ titulo, materia, prioridade });
@@ -54,7 +54,7 @@ app.post("/salvar", autenticarUsuario, async (req, res) => {
   }
 });
 
-// GET - listar só as tarefas do usuário logado
+
 app.get("/listar", autenticarUsuario, async (req, res) => {
   try {
     const snapshot = await db.collection("usuarios").doc(req.uid)
@@ -67,7 +67,7 @@ app.get("/listar", autenticarUsuario, async (req, res) => {
   }
 });
 
-// DELETE
+
 app.delete("/deletar/:id", autenticarUsuario, async (req, res) => {
   try {
     await db.collection("usuarios").doc(req.uid)
@@ -79,7 +79,7 @@ app.delete("/deletar/:id", autenticarUsuario, async (req, res) => {
   }
 });
 
-// PUT
+
 app.put("/editar/:id", autenticarUsuario, async (req, res) => {
   try {
     await db.collection("usuarios").doc(req.uid)

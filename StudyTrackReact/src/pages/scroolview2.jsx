@@ -17,13 +17,13 @@ const Modal2 = ({ isOpen2, onClose2, onAdicionar }) => {
     try {
       const novaTarefa = { titulo, materia, prioridade };
       
-      // Envia para o backend
+      
       await api.post("/salvar", novaTarefa);
 
-      // Atualiza a lista na tela principal
+      
       onAdicionar(novaTarefa);
 
-      // Limpa os campos e fecha o modal
+      
       setTitulo("");
       setMateria("");
       setPrioridade("Média");

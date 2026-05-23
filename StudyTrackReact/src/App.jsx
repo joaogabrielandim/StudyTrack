@@ -25,13 +25,13 @@ function AppNavigation() {
 
   const handleAdicionarSessao = (novaSessao) => {
     setSessoes((prev) => [novaSessao, ...prev]);
-    // Dispara recarregamento imediato dos gráficos e cards
+   
     setRecarregarStats((prev) => prev + 1);
   };
 
   const handleDeletarSessao = (id) => {
     setSessoes((prev) => prev.filter((s) => s.id !== id));
-    // Atualiza stats ao deletar sessão também
+   
     setRecarregarStats((prev) => prev + 1);
   };
 

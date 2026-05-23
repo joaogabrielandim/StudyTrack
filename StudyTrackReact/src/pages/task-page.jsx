@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 import Modal2 from "./scroolview2";
 import api from "../services/api";
 
-// onRecarregarStats → notifica o App.jsx para atualizar os gráficos da Home
+
 function Task({ onRecarregarStats }) {
   const [isOpen2, setIsOpen2] = useState(false);
   const [tarefas, setTarefas] = useState([]);
@@ -45,7 +45,7 @@ function Task({ onRecarregarStats }) {
     }
   }
 
-  // Chamado pelo Modal2 após salvar — recarrega lista e notifica Home
+
   const adicionarTarefa = async () => {
     await fetchTarefas();
     onRecarregarStats?.(); // atualiza contador de tarefas nos gráficos
@@ -59,7 +59,7 @@ function Task({ onRecarregarStats }) {
       setTarefas((prev) =>
         prev.map((t) => (t.id === id ? { ...t, concluida: novoStatus } : t))
       );
-      onRecarregarStats?.(); // concluir/desconcluir tarefa afeta "Tarefas Concluídas"
+      onRecarregarStats?.(); 
     } catch (err) {
       console.error("Erro ao atualizar tarefa:", err);
     }
@@ -69,7 +69,7 @@ function Task({ onRecarregarStats }) {
     try {
       await api.delete(`/deletar/${id}`);
       setTarefas((prev) => prev.filter((t) => t.id !== id));
-      onRecarregarStats?.(); // deletar tarefa afeta contadores
+      onRecarregarStats?.(); 
     } catch (err) {
       console.error("Erro ao deletar tarefa:", err);
     }
@@ -142,7 +142,7 @@ function Task({ onRecarregarStats }) {
         <div className="box-task">
           <div className="coluna-cards-task">
 
-            {/* PROGRESSO */}
+            
             <div className="boxprogresso-task">
               <div className="divInterna1-task">
                 <div className="progresso-header">
@@ -163,7 +163,7 @@ function Task({ onRecarregarStats }) {
               </div>
             </div>
 
-            {/* MINHAS TAREFAS (pendentes) */}
+            
             <div className="boxhoras-task">
               <div className="divInterna2-task">
                 <h3 className="titulo-secao-tarefas">Minhas Tarefas</h3>
@@ -190,7 +190,7 @@ function Task({ onRecarregarStats }) {
             </div>
           </div>
 
-          {/* TAREFAS FEITAS */}
+          
           <div className="TarefasPorFazer-task">
             <div className="divInterna3-task">
               <h3 className="titulo-secao-tarefas">Tarefas Feitas</h3>

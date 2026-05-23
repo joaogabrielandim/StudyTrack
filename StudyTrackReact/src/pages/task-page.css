@@ -45,32 +45,9 @@
   cursor: pointer;
 }
 
-/*
-  box-task é o container geral.
-  Dentro dele temos: .coluna-cards-task (contém progresso + minhas tarefas)
-  e .TarefasPorFazer-task (tarefas feitas).
 
-  Estratégia: transformamos .box-task em grid de 2 colunas.
-  .coluna-cards-task ocupa coluna 1 inteira (linha 1 e 2).
-  Mas queremos o progresso em cima das duas colunas.
 
-  Como o progresso está dentro de .coluna-cards-task, usamos
-  position absolute/negative margin para ele "vazar" para a direita
-  e cobrir a largura total.
 
-  Alternativa mais limpa: .box-task vira display:grid com subgrid.
-  .coluna-cards-task e .TarefasPorFazer ficam na mesma linha (row 2).
-  .boxprogresso-task dentro de .coluna-cards-task usa
-  grid-column: 1 / -1 via um container wrapper.
-
-  Solução definitiva sem mexer no JSX:
-  Transformar .box-task em grid e usar CSS para que o progresso,
-  embora dentro de .coluna-cards-task, se comporte como se estivesse
-  acima das duas colunas — através de display:contents na coluna
-  e posicionamento do progresso com grid próprio.
-*/
-
-/* box-task: grid de 2 colunas, 2 linhas */
 .box-task {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -79,13 +56,12 @@
   width: 100%;
 }
 
-/* coluna esquerda: usa display:contents para que seus filhos
-   participem diretamente do grid do pai */
+
 .coluna-cards-task {
   display: contents;
 }
 
-/* Progresso: filho de .coluna-cards-task, ocupa as 2 colunas na linha 1 */
+
 .boxprogresso-task {
   grid-column: 1 / 3;
   grid-row: 1;
@@ -95,7 +71,7 @@
   box-sizing: border-box;
 }
 
-/* Minhas Tarefas: coluna 1, linha 2 */
+
 .boxhoras-task {
   grid-column: 1;
   grid-row: 2;
@@ -111,7 +87,7 @@
   border: 1px solid #eaeaea;
 }
 
-/* Tarefas Feitas: coluna 2, linha 2 */
+
 .TarefasPorFazer-task {
   grid-column: 2;
   grid-row: 2;

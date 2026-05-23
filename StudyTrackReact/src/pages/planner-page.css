@@ -19,10 +19,10 @@
 
 .planner-container-restrito {
     width: 100%;
-    flex: 1;                    /* ← ocupa toda a altura restante */
+    flex: 1;                    
     display: flex;
     flex-direction: row;
-    align-items: stretch;       /* ← faz as colunas terem a mesma altura */
+    align-items: stretch;       
     gap: 24px;
 }
 
@@ -39,7 +39,7 @@
     flex-direction: column;
 }
 
-/* faz os painéis internos crescerem para preencher a coluna */
+
 .col-tarefas > div,
 .col-calendario > div {
     flex: 1;

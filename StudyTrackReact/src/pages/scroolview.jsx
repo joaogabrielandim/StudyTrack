@@ -1,17 +1,32 @@
 import React, { useState } from 'react';
 import { db } from '../firebase';
 import { collection, addDoc, Timestamp } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
+
+// ── IMPORTANTE: onAdicionarSessao agora recebe a sessão salva e dispara
+// o recarregarStats no componente pai (App ou index), que é passado para
+// o hook Homejs, fazendo os gráficos atualizarem automaticamente.
 
 const Modal = ({ isOpen, onClose, onAdicionarSessao }) => {
   const [tempoEstudo, setTempoEstudo] = useState('');
   const [materia, setMateria] = useState('Selecione uma matéria');
   const [horas, setHoras] = useState(0);
   const [minutos, setMinutos] = useState(0);
+  const [salvando, setSalvando] = useState(false);
 
   if (!isOpen) return null;
 
   const handleAdicionar = async () => {
-    if (!tempoEstudo || materia === 'Selecione uma matéria') return;
+    if (!tempoEstudo.trim() || materia === 'Selecione uma matéria') return;
+
+    const auth = getAuth();
+    const uid = auth.currentUser?.uid;
+    if (!uid) {
+      console.error('Usuário não autenticado');
+      return;
+    }
+
+    setSalvando(true);
 
     const novaSessao = {
       tempoEstudo,
@@ -19,13 +34,17 @@ const Modal = ({ isOpen, onClose, onAdicionarSessao }) => {
       horas: Number(horas),
       minutos: Number(minutos),
       criadoEm: Timestamp.now(),
+      uid, // ← campo necessário para filtrar por usuário nos gráficos
     };
 
     try {
       const docRef = await addDoc(collection(db, 'sessoes'), novaSessao);
+      // Passa a sessão completa com id para o pai atualizar a lista e os gráficos
       onAdicionarSessao({ id: docRef.id, ...novaSessao });
     } catch (err) {
       console.error('Erro ao salvar sessão:', err);
+    } finally {
+      setSalvando(false);
     }
 
     setTempoEstudo('');
@@ -43,13 +62,14 @@ const Modal = ({ isOpen, onClose, onAdicionarSessao }) => {
           <button onClick={onClose} style={styles.fecharbotao}>&times;</button>
         </div>
 
-        <form style={styles.form}>
+        <div style={styles.form}>
           <label>Tempo de Estudo</label>
           <input
             type="text"
             style={styles.input}
             value={tempoEstudo}
             onChange={(e) => setTempoEstudo(e.target.value)}
+            placeholder="Ex: Revisão de cálculo"
           />
 
           <label>Matéria</label>
@@ -61,6 +81,13 @@ const Modal = ({ isOpen, onClose, onAdicionarSessao }) => {
             <option>Selecione uma matéria</option>
             <option>Matemática</option>
             <option>Programação</option>
+            <option>Física</option>
+            <option>Química</option>
+            <option>Português</option>
+            <option>História</option>
+            <option>Geografia</option>
+            <option>Inglês</option>
+            <option>Outra</option>
           </select>
 
           <label>Duração da Sessão</label>
@@ -89,10 +116,16 @@ const Modal = ({ isOpen, onClose, onAdicionarSessao }) => {
               <span style={styles.labelTempo}>min</span>
             </div>
           </div>
-          <button type="button" style={styles.adicionarbotao} onClick={handleAdicionar}>
-            Adicionar Sessão
+
+          <button
+            type="button"
+            style={{ ...styles.adicionarbotao, opacity: salvando ? 0.6 : 1 }}
+            onClick={handleAdicionar}
+            disabled={salvando}
+          >
+            {salvando ? 'Salvando...' : 'Adicionar Sessão'}
           </button>
-        </form>
+        </div>
       </div>
     </div>
   );
@@ -158,6 +191,11 @@ const styles = {
     fontSize: '16px',
     textAlign: 'right',
   },
+  labelTempo: {
+    fontSize: '14px',
+    color: '#6b7280',
+    whiteSpace: 'nowrap',
+  },
   adicionarbotao: {
     backgroundColor: '#000',
     color: 'white',
@@ -166,6 +204,7 @@ const styles = {
     border: 'none',
     fontWeight: 'bold',
     cursor: 'pointer',
+    transition: 'opacity 0.2s',
   },
   fecharbotao: {
     background: 'none',
@@ -177,7 +216,7 @@ const styles = {
     color: 'black',
     margin: 0,
     fontWeight: 'bold',
-  }
+  },
 };
 
 export default Modal;

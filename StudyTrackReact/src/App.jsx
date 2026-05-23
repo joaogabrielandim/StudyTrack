@@ -25,11 +25,18 @@ function AppNavigation() {
 
   const handleAdicionarSessao = (novaSessao) => {
     setSessoes((prev) => [novaSessao, ...prev]);
-    setRecarregarStats(prev => prev + 1); // dispara recarregamento dos cartões
+    // Dispara recarregamento imediato dos gráficos e cards
+    setRecarregarStats((prev) => prev + 1);
   };
 
   const handleDeletarSessao = (id) => {
     setSessoes((prev) => prev.filter((s) => s.id !== id));
+    // Atualiza stats ao deletar sessão também
+    setRecarregarStats((prev) => prev + 1);
+  };
+
+  const handleRecarregarStats = () => {
+    setRecarregarStats((prev) => prev + 1);
   };
 
   return (
@@ -47,7 +54,10 @@ function AppNavigation() {
             />
           }
         />
-        <Route path="/tarefas" element={<Task />} />
+        <Route
+          path="/tarefas"
+          element={<Task onRecarregarStats={handleRecarregarStats} />}
+        />
         <Route path="/calendario" element={<CalendarChecklist />} />
       </Routes>
       <Modal

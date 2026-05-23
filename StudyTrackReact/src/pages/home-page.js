@@ -1,7 +1,17 @@
 import { useEffect, useState } from "react";
 import { db } from "../firebase";
-import { collection, query, where, getDocs, doc, getDoc, setDoc, Timestamp } from "firebase/firestore";
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  doc,
+  getDoc,
+  setDoc,
+  Timestamp,
+} from "firebase/firestore";
 import { getAuth } from "firebase/auth";
+import api from "../services/api";
 
 function Homejs(recarregarStats = 0) {
   const [dataCompleta, setDataCompleta] = useState("");
@@ -9,10 +19,21 @@ function Homejs(recarregarStats = 0) {
   const [tarefasConcluidas, setTarefasConcluidas] = useState(0);
   const [sessoesHoje, setSessoesHoje] = useState(0);
   const [sequencia, setSequencia] = useState(0);
+  const [carregando, setCarregando] = useState(true);
+
+  const [dadosBarras, setDadosBarras] = useState([]);
+  const [dadosRosca, setDadosRosca] = useState([]);
+  const [tarefasRecentes, setTarefasRecentes] = useState([]);
+  const [proximasSessoes, setProximasSessoes] = useState([]);
 
   useEffect(() => {
     const agora = new Date();
-    const opcoes = { weekday: "long", year: "numeric", month: "long", day: "numeric" };
+    const opcoes = {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    };
     setDataCompleta(agora.toLocaleDateString("pt-BR", opcoes));
   }, []);
 
@@ -25,33 +46,147 @@ function Homejs(recarregarStats = 0) {
   }, []);
 
   async function carregarEstatisticas() {
-    const inicioDia = new Date();
-    inicioDia.setHours(0, 0, 0, 0);
-    const fimDia = new Date();
-    fimDia.setHours(23, 59, 59, 999);
+    setCarregando(true);
+    try {
+      const auth = getAuth();
+      const uid = auth.currentUser?.uid;
+      if (!uid) return;
 
-    const qSessoes = query(
-      collection(db, "sessoes"),
-      where("criadoEm", ">=", Timestamp.fromDate(inicioDia)),
-      where("criadoEm", "<=", Timestamp.fromDate(fimDia))
-    );
-    const snapSessoes = await getDocs(qSessoes);
-    let totalMinutos = 0;
-    snapSessoes.forEach(d => {
-      const s = d.data();
-      totalMinutos += (Number(s.horas) || 0) * 60 + (Number(s.minutos) || 0);
-    });
-    const horas = Math.floor(totalMinutos / 60);
-    const minutos = totalMinutos % 60;
-    setHorasEstudo(`${horas}h ${minutos}min`);
-    setSessoesHoje(snapSessoes.size);
+      const inicioDia = new Date();
+      inicioDia.setHours(0, 0, 0, 0);
+      const fimDia = new Date();
+      fimDia.setHours(23, 59, 59, 999);
 
-    const qTarefas = query(
-      collection(db, "tarefas"),
-      where("concluida", "==", true)
-    );
-    const snapTarefas = await getDocs(qTarefas);
-    setTarefasConcluidas(snapTarefas.size);
+      // ── 1. Sessões de hoje (Firebase) ──────────────────────────────────────
+      const qSessoes = query(
+        collection(db, "sessoes"),
+        where("uid", "==", uid),
+        where("criadoEm", ">=", Timestamp.fromDate(inicioDia)),
+        where("criadoEm", "<=", Timestamp.fromDate(fimDia))
+      );
+      const snapSessoes = await getDocs(qSessoes);
+
+      let totalMinutos = 0;
+      const sessoesHojeList = [];
+
+      snapSessoes.forEach((d) => {
+        const s = d.data();
+        const mins = (Number(s.horas) || 0) * 60 + (Number(s.minutos) || 0);
+        totalMinutos += mins;
+        sessoesHojeList.push({
+          id: d.id,
+          materia: s.materia,
+          horas: s.horas,
+          minutos: s.minutos,
+          tempoEstudo: s.tempoEstudo,
+        });
+      });
+
+      const horas = Math.floor(totalMinutos / 60);
+      const minutos = totalMinutos % 60;
+      setHorasEstudo(`${horas}h ${minutos}min`);
+      setSessoesHoje(snapSessoes.size);
+      setProximasSessoes(sessoesHojeList);
+
+      // ── 2. Tarefas concluídas (API REST) ───────────────────────────────────
+      // CORREÇÃO: tarefas antigas no Firestore não têm o campo "concluida",
+      // então ele vem como undefined. Usamos Boolean() para normalizar
+      // undefined → false, null → false, true → true, 1 → true, "true" → false
+      // Para cobrir o caso de string "true" também checamos explicitamente.
+      try {
+        const { data: todasTarefas } = await api.get("/listar");
+
+        const concluidas = todasTarefas.filter((t) => {
+          const val = t.concluida;
+          // Cobre: true (boolean), 1 (inteiro), "true" (string), e ignora undefined/null/false
+          return val === true || val === 1 || val === "true";
+        });
+
+        setTarefasConcluidas(concluidas.length);
+
+        const recentes = concluidas.slice(-5).reverse().map((t) => ({
+          id: t.id,
+          titulo: t.titulo,
+          materia: t.materia,
+        }));
+        setTarefasRecentes(recentes);
+      } catch (err) {
+        console.error("Erro ao buscar tarefas da API:", err);
+        setTarefasConcluidas(0);
+        setTarefasRecentes([]);
+      }
+
+      // ── 3. Gráfico de barras — últimos 7 dias (Firebase) ──────────────────
+      const diasLabels = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
+      const hoje = new Date();
+      const ultimos7 = [];
+
+      for (let i = 6; i >= 0; i--) {
+        const d = new Date(hoje);
+        d.setDate(hoje.getDate() - i);
+        const inicio = new Date(d);
+        inicio.setHours(0, 0, 0, 0);
+        const fim = new Date(d);
+        fim.setHours(23, 59, 59, 999);
+        ultimos7.push({
+          label: diasLabels[d.getDay()],
+          inicio: Timestamp.fromDate(inicio),
+          fim: Timestamp.fromDate(fim),
+          totalHoras: 0,
+        });
+      }
+
+      const qSemana = query(
+        collection(db, "sessoes"),
+        where("uid", "==", uid),
+        where("criadoEm", ">=", ultimos7[0].inicio),
+        where("criadoEm", "<=", ultimos7[6].fim)
+      );
+      const snapSemana = await getDocs(qSemana);
+
+      snapSemana.forEach((d) => {
+        const s = d.data();
+        const ts = s.criadoEm?.toDate?.() ?? new Date();
+        const mins = (Number(s.horas) || 0) * 60 + (Number(s.minutos) || 0);
+
+        for (const dia of ultimos7) {
+          if (ts >= dia.inicio.toDate() && ts <= dia.fim.toDate()) {
+            dia.totalHoras += mins / 60;
+            break;
+          }
+        }
+      });
+
+      setDadosBarras(
+        ultimos7.map((d) => ({
+          dia: d.label,
+          horas: parseFloat(d.totalHoras.toFixed(2)),
+        }))
+      );
+
+      // ── 4. Gráfico de rosca — por matéria (Firebase) ──────────────────────
+      const materiaMap = {};
+      snapSemana.forEach((d) => {
+        const s = d.data();
+        const materia = s.materia || "Outra";
+        const mins = (Number(s.horas) || 0) * 60 + (Number(s.minutos) || 0);
+        materiaMap[materia] = (materiaMap[materia] || 0) + mins;
+      });
+
+      const CORES_ROSCA = [
+        "#378ADD", "#1D9E75", "#D85A30",
+        "#7F77DD", "#D4537E", "#BA7517",
+      ];
+      const rosca = Object.entries(materiaMap).map(([name, mins], idx) => ({
+        name,
+        value: parseFloat((mins / 60).toFixed(2)),
+        fill: CORES_ROSCA[idx % CORES_ROSCA.length],
+      }));
+      setDadosRosca(rosca);
+
+    } finally {
+      setCarregando(false);
+    }
   }
 
   async function registrarAcessoESequencia() {
@@ -79,7 +214,11 @@ function Homejs(recarregarStats = 0) {
         seq = 1;
       }
 
-      await setDoc(userRef, { ultimoAcesso: diaHoje, sequencia: seq }, { merge: true });
+      await setDoc(
+        userRef,
+        { ultimoAcesso: diaHoje, sequencia: seq },
+        { merge: true }
+      );
     } else {
       seq = userData.sequencia || 1;
     }
@@ -87,13 +226,18 @@ function Homejs(recarregarStats = 0) {
     setSequencia(seq);
   }
 
-  function adicionarSessao() {
-    const nova_sessao = document.createElement("div");
-    nova_sessao.classList.add("estudos");
-    document.getElementById("sessao-estudos").appendChild(nova_sessao);
-  }
-
-  return { dataCompleta, adicionarSessao, horasEstudo, tarefasConcluidas, sessoesHoje, sequencia };
+  return {
+    dataCompleta,
+    horasEstudo,
+    tarefasConcluidas,
+    sessoesHoje,
+    sequencia,
+    carregando,
+    dadosBarras,
+    dadosRosca,
+    tarefasRecentes,
+    proximasSessoes,
+  };
 }
 
 export default Homejs;

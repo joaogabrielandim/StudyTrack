@@ -7,7 +7,7 @@ import { getAuth } from 'firebase/auth';
 
 const Modal = ({ isOpen, onClose, onAdicionarSessao }) => {
   const [tempoEstudo, setTempoEstudo] = useState('');
-  const [materia, setMateria] = useState('Selecione uma matéria');
+  const [materia, setMateria] = useState('');
   const [horas, setHoras] = useState(0);
   const [minutos, setMinutos] = useState(0);
   const [salvando, setSalvando] = useState(false);
@@ -61,23 +61,14 @@ const Modal = ({ isOpen, onClose, onAdicionarSessao }) => {
         </div>
 
         <div style={styles.form}>
-          <label>Tempo de Estudo</label>
-          <input
-            type="text"
-            style={styles.input}
-            value={tempoEstudo}
-            onChange={(e) => setTempoEstudo(e.target.value)}
-            placeholder="Ex: Revisão de cálculo"
-          />
 
           <label>Matéria</label>
-          <label style={{fontWeight: '500'}}>Matéria</label>
-          <input 
-            type="text"
-            value={materia}
-            onChange={(e) => setMateria(e.target.value)}
-            style={styles2.input} 
-          />
+          <input
+          type="text"
+          style={styles.input}
+          value={materia}
+          onChange={(e) => setMateria(e.target.value)}
+         />
 
           <label>Duração da Sessão</label>
           <div style={styles.containerTempo}>

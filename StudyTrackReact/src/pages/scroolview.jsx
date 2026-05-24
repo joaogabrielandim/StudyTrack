@@ -3,10 +3,7 @@ import { db } from '../firebase';
 import { collection, addDoc, Timestamp } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 
-
-
 const Modal = ({ isOpen, onClose, onAdicionarSessao }) => {
-  const [tempoEstudo, setTempoEstudo] = useState('');
   const [materia, setMateria] = useState('');
   const [horas, setHoras] = useState(0);
   const [minutos, setMinutos] = useState(0);
@@ -15,7 +12,11 @@ const Modal = ({ isOpen, onClose, onAdicionarSessao }) => {
   if (!isOpen) return null;
 
   const handleAdicionar = async () => {
-    if (!tempoEstudo.trim() || materia === 'Selecione uma matéria') return;
+   
+    if (!materia.trim()) {
+      alert('Preencha a matéria');
+      return;
+    }
 
     const auth = getAuth();
     const uid = auth.currentUser?.uid;
@@ -27,29 +28,28 @@ const Modal = ({ isOpen, onClose, onAdicionarSessao }) => {
     setSalvando(true);
 
     const novaSessao = {
-      tempoEstudo,
+      tempoEstudo: materia, 
       materia,
       horas: Number(horas),
       minutos: Number(minutos),
       criadoEm: Timestamp.now(),
-      uid, 
+      uid,
     };
 
     try {
       const docRef = await addDoc(collection(db, 'sessoes'), novaSessao);
-      
       onAdicionarSessao({ id: docRef.id, ...novaSessao });
+
+      
+      setMateria('');
+      setHoras(0);
+      setMinutos(0);
+      onClose();
     } catch (err) {
       console.error('Erro ao salvar sessão:', err);
     } finally {
       setSalvando(false);
     }
-
-    setTempoEstudo('');
-    setMateria('Selecione uma matéria');
-    setHoras(0);
-    setMinutos(0);
-    onClose();
   };
 
   return (
@@ -61,14 +61,14 @@ const Modal = ({ isOpen, onClose, onAdicionarSessao }) => {
         </div>
 
         <div style={styles.form}>
-
           <label>Matéria</label>
           <input
-          type="text"
-          style={styles.input}
-          value={materia}
-          onChange={(e) => setMateria(e.target.value)}
-         />
+            type="text"
+            style={styles.input}
+            value={materia}
+            onChange={(e) => setMateria(e.target.value)}
+            placeholder="Ex: Matemática, Programação..."
+          />
 
           <label>Duração da Sessão</label>
           <div style={styles.containerTempo}>
@@ -114,10 +114,7 @@ const Modal = ({ isOpen, onClose, onAdicionarSessao }) => {
 const styles = {
   overlay: {
     position: 'fixed',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
+    top: 0, left: 0, right: 0, bottom: 0,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     display: 'flex',
     alignItems: 'center',

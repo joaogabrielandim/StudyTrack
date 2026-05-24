@@ -2,10 +2,9 @@ import axios from "axios";
 import { getAuth } from "firebase/auth";
 
 const api = axios.create({
-  baseURL: "http://localhost:3000"
+  baseURL: "https://studytrack-back-2.onrender.com"
 });
 
-// Interceptor: roda antes de cada requisição
 api.interceptors.request.use(async (config) => {
   const user = getAuth().currentUser;
 

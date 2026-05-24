@@ -67,7 +67,6 @@ const Modal = ({ isOpen, onClose, onAdicionarSessao }) => {
             style={styles.input}
             value={materia}
             onChange={(e) => setMateria(e.target.value)}
-            placeholder="Ex: Matemática, Programação..."
           />
 
           <label>Duração da Sessão</label>

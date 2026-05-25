@@ -1,14 +1,15 @@
+import 'dotenv/config';
 import express from "express";
 import { getFirestore } from "firebase-admin/firestore";
 import { fileURLToPath } from "url";
 import admin from "firebase-admin";
 import { dirname } from "path";
 import cors from "cors";
-import { readFile } from "fs";
+import { readFileSync } from "fs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
-var serviceAccount = JSON.parse(readFileSync(`${__dirname}/../../studytrack-82d9b-firebase-adminsdk-fbsvc-8bab1b53e2.json`));
+var serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)

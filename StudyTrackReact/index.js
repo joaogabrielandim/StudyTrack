@@ -9,7 +9,7 @@ import { readFileSync } from "fs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
-var serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+var serviceAccount = JSON.parse(readFileSync('/etc/secrets/serviceAccount.json'));
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
